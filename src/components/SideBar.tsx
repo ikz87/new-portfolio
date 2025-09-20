@@ -50,7 +50,7 @@ export function SideBar({
             animate={{opacity: 1}}
             exit={{opacity: 0}}
             className="top-0 left-0 z-50 fixed">
-            <div className="w-dvw h-screen flex bg-black/50 flex-row-reverse pb-12 items-end justify-end">
+            <div className="w-dvw h-screen flex bg-black/50 flex-row-reverse items-end justify-end">
               <div className="h-full max-w-96 origin-right">
                 <motion.div 
                   initial={{x: "100%"}}
@@ -64,7 +64,7 @@ export function SideBar({
                   className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3">
                   <X strokeWidth={3}/>
                 </div>
-                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4">
+                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4 pb-14">
                   <div className="w-full flex flex-col justify-center">
                     <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
                       <a target="_blank" href="mailto:i.arcia135@gmail.com" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
