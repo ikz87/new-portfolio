@@ -12,8 +12,10 @@ function App() {
   const exitAnimDuration = 0.2;
 
   const handleNavigation = (path: string) => {
+    if (location.pathname === path){
+      return;
+    }
     setIsExiting(true);
-    setIsSidebarOpen(false);
     console.log("exiting");
     setTimeout(() => navigate(path), 1000 * exitAnimDuration);
   };

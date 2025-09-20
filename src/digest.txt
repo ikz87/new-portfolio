@@ -76,34 +76,46 @@ File: App.css
 ================================================
 File: App.tsx
 ================================================
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TopBar } from "./components/TopBar";
 import { SideBar } from "./components/SideBar";
-import { motion, AnimatePresence } from "motion/react";
+
 import { useState, useEffect } from "react";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const exitAnimDuration = 0.2;
 
   const handleNavigation = (path: string) => {
     setIsExiting(true);
+    setIsSidebarOpen(false);
     console.log("exiting");
     setTimeout(() => navigate(path), 1000 * exitAnimDuration);
   };
 
-  useEffect(()=>{console.log(isSidebarOpen)},[isSidebarOpen]);
+  useEffect(() => {
+    setIsExiting(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    console.log(isSidebarOpen);
+  }, [isSidebarOpen]);
   
   return (
     <>
-      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 sm:pl-6 sm:pt-6 sm:pr-8 pl-2 pt-2 pr-4 space-y-4">
-        <TopBar
-          setIsSidebarOpen={setIsSidebarOpen}
-        />
+      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md::pl-6 md:pt-6 md:pr-8 pl-2 pt-2 pr-4 space-y-4">
+        <TopBar setIsSidebarOpen={setIsSidebarOpen} />
         <div className="sm:hidden block">
-          <SideBar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
+          <SideBar 
+            isSidebarOpen={isSidebarOpen} 
+            setIsSidebarOpen={setIsSidebarOpen}
+            handleNavigation={handleNavigation}
+          />
         </div>
-        <Outlet/>
+        <Outlet context={{ isExiting, handleNavigation }} />
       </div>
     </>
   )
@@ -267,25 +279,25 @@ File: components/SideBar.tsx
 import { motion, AnimatePresence } from "motion/react";
 import { HardShadowButton } from "@/components/ui/HardShadowButton";
 import { HardShadowRect } from "@/components/ui/HardShadowRect";
-import { Download } from "lucide-react";
+import { Download, Mail, Code, X } from "lucide-react";
 
 type SideBarProps = {
-  isSidebarOpen: bool;
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<bool>>
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleNavigation: (path: string) => void;
 };
 
 export function SideBar({
   isSidebarOpen,
   setIsSidebarOpen,
-}: SideBarProps){
-
+  handleNavigation,
+}: SideBarProps) {
   const buttons = {
     dotfiles: {
       title: "Dotfiles",
       summary: "The heart of my work: The configuration files for my linux machine",
       route: "/dotfiles",
       color: "bg-blue-50",
-
     },
     coolProjects: {
       title: "Projects",
@@ -299,6 +311,12 @@ export function SideBar({
       route: "/work",
       color: "bg-blue-50",
     },
+    home: {
+      title: "Home",
+      summary: "Go to home page",
+      route: "/",
+      color: "bg-blue-50",
+    },
   };
 
   return (
@@ -309,68 +327,89 @@ export function SideBar({
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            onClick={()=>{setIsSidebarOpen(false)}}
-            className="top-0 left-0 z-50 fixed bg-black/50">
-            <div className="w-dvw h-dvh">
-              <motion.div 
-                initial={{width: 0}}
-                animate={{width: "50%"}}
-                exit={{width: 0}}
-                className="border-r-black border-r-3 bg-amber-50 h-full"
-              >
-                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-end justify-end gap-4 pl-2 pr-4 pt-16">
-                  <HardShadowButton 
-                    className={`bg-blue-50 w-full`}
-                    onClick={() => {
-                      const link = document.createElement('a');
-                      link.href = '/documents/Isaac Arcia resume.pdf';
-                      link.download = 'Isaac Arcia resume.pdf';
-                      link.click();
-                    }}
-                    popUpContent={
-                      <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
-                        Click to download as PDF
-                      </HardShadowRect>
-                    }
-                  >
-                    <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-                      <Download/>
-                      Resume
+            className="top-0 left-0 z-50 fixed">
+            <div className="w-dvw h-dvh flex bg-black/50 flex-row-reverse items-end justify-end">
+              <div className="h-full max-w-96 origin-right">
+                <motion.div 
+                  initial={{x: "100%"}}
+                  animate={{x: 0}}
+                  exit={{x: "100%"}}
+                  transition={{ type: "tween", ease: "easeInOut" }}
+                  className="relative border-r-black max-w-96 border-r-3 translate-x-2 bg-amber-50 h-full w-max"
+                >
+                <div 
+                    onClick={()=>{setIsSidebarOpen(false)}}
+                  className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3">
+                  <X strokeWidth={3}/>
+                </div>
+                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4">
+                  <div className="w-full flex flex-col justify-center">
+                    <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
+                      <a target="_blank" href="mailto:i.arcia135@gmail.com" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
+                        <Mail className="text-red-600"/>
+                        Email me
+                      </a>
+                      <a target="_blank" href="https://github.com/ikz87/new-portfolio" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
+                        <Code className="text-green-600"/>
+                        Source
+                      </a>
                     </div>
-                  </HardShadowButton>
-                  <HardShadowButton 
-                    className={`bg-blue-50 w-full`}
-                    onClick={() => {
-                      handleNavigation("/contact")
-                    }}
-                    popUpContent={
-                      <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
-                        All the ways you can contact me for hiring
-                      </HardShadowRect>
-                    }
-                  >
-                    <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-                      Contact
-                    </div>
-                  </HardShadowButton>
-                  {Object.entries(buttons).map(([key, button]) => (
+                  </div>
+                  <div className="flex flex-col-reverse w-full gap-4 pr-4 pl-2">
                     <HardShadowButton 
-                      key={key}
-                      className={`${button.color} w-full`}
-                      onClick={() => handleNavigation(button.route)}
+                      className={`bg-blue-50 w-full`}
+                      onClick={() => {
+                        const link = document.createElement('a');
+                        link.href = '/documents/Isaac Arcia resume.pdf';
+                        link.download = 'Isaac Arcia resume.pdf';
+                        link.click();
+                      }}
                       popUpContent={
-                        <HardShadowRect className="bg-white pt-14 p-2 text-justify">
-                          {button.summary}
+                        <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                          Click to download as PDF
                         </HardShadowRect>
                       }
                     >
-                      <div className="font-extrabold p-4">
-                        {button.title}
+                      <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                        <Download/>
+                        Resume
                       </div>
                     </HardShadowButton>
-                  ))}
+                    <HardShadowButton 
+                      className={`bg-blue-50 w-full`}
+                      onClick={() => handleNavigation("/contact")}
+                      popUpContent={
+                        <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                          All the ways you can contact me for hiring
+                        </HardShadowRect>
+                      }
+                    >
+                      <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                        Contact
+                      </div>
+                    </HardShadowButton>
+                    {Object.entries(buttons).map(([key, button]) => (
+                      <HardShadowButton 
+                        key={key}
+                        className={`${button.color} w-full`}
+                        onClick={() => handleNavigation(button.route)}
+                        popUpContent={
+                          <HardShadowRect className="bg-white pt-14 p-2 text-justify">
+                            {button.summary}
+                          </HardShadowRect>
+                        }
+                      >
+                        <div className="font-extrabold p-4">
+                          {button.title}
+                        </div>
+                      </HardShadowButton>
+                    ))}
+                  </div>
                 </HardShadowRect>
               </motion.div>
+              </div>
+              <div onClick={()=>{setIsSidebarOpen(false)}} className=" w-full h-full">
+            </div>
             </div>
           </motion.div>
         )}
@@ -384,37 +423,27 @@ export function SideBar({
 ================================================
 File: components/TopBar.tsx
 ================================================
-import { Link } from "react-router-dom";
 import { HardShadowButton } from './ui/HardShadowButton.tsx';
 import { HardShadowRect } from './ui/HardShadowRect.tsx';
 import { 
-  Home,
   Github,
   Linkedin,
   Mail,
   Menu,
   Code,
-  User,
 } from 'lucide-react';
 
 type TopBarProps = {
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<bool>>
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export function TopBar({
   setIsSidebarOpen,
 }: TopBarProps ){
   return(
-    <div className="mx-auto w-full max-w-4xl flex flex-row h-16 gap-4">
-      <HardShadowRect className="flex items-center flex-row rounded-xl w-full bg-amber-50 h-full">
+    <div className="mx-auto w-full max-w-4xl flex flex-row h-16">
+      <HardShadowRect className="flex items-center flex-row sm:rounded-xl rounded-l-xl w-full bg-amber-50 h-full overflow-visible">
         <div className="w-full md:text-lg flex md:gap-3 gap-2 items-center">
-          <div 
-            onClick={()=>{setIsSidebarOpen(true)}}
-            className="p-4 cursor-pointer sm:hidden bg-blue-50 border-r-3 h-16 flex items-center">
-            <Menu 
-              strokeWidth={3}
-              className=""/>
-          </div>
           <h1 className="md:pl-3 pl-2 font-extrabold">
             ikz87's portfolio
           </h1>
@@ -440,6 +469,16 @@ export function TopBar({
           </a>
         </div>
       </HardShadowRect>
+          <div className="w-fit">
+            <HardShadowButton 
+              popUpContent={null}
+              onClick={()=>{setIsSidebarOpen(true)}}
+              className="-ml-2 p-4 cursor-pointer sm:hidden bg-blue-50 h-16 flex !rounded-l-none items-center">
+              <Menu 
+                strokeWidth={3}
+                className=""/>
+            </HardShadowButton>
+          </div>
     </div>
 )}
 
@@ -681,10 +720,11 @@ import {
   ChevronLeft,
   ChevronRight,
   Loader2,
+  Home,
   X,
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 
 type SectionData = {
   title: string;
@@ -701,32 +741,29 @@ type SectionData = {
 type SectionLayoutProps = {
   items: Record<string, SectionData>;
   defaultSelected?: string;
-  showNavigation?: boolean;
   showPeriod?: boolean;
+};
+
+type ContextType = {
+  isExiting: boolean;
+  handleNavigation: (path: string) => void;
 };
 
 export function SectionLayout({ 
   items, 
   defaultSelected, 
-  showNavigation = true,
   showPeriod = true 
 }: SectionLayoutProps) {
+  const { isExiting, handleNavigation } = useOutletContext<ContextType>();
   const itemKeys = Object.keys(items);
   const [selectedKey, setSelectedKey] = useState(defaultSelected || itemKeys[0]);
   const [isAnimating, setIsAnimating] = useState(true);
   const selectedItem = items[selectedKey];
   const [imageIndex, setImageIndex] = useState(0);
-  const [exiting, setIsExiting] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const animDuration = 0.2
-  const navigate = useNavigate();
-  const timeoutRef = useRef(null);
-
-  const handleNavigation = (path: string) => {
-    setIsExiting(true);
-    setTimeout(() => navigate(path), animDuration*1000);
-  };
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Need this to keep track of whether I want
@@ -740,7 +777,7 @@ export function SectionLayout({
     timeoutRef.current = setTimeout(() => {
       setIsAnimating(false);
       timeoutRef.current = null;
-    }, animDuration*1000*2);
+    }, animDuration*1000*2) as unknown as number;
   }, [selectedKey]);
 
   const handlePreviousImage = () => {
@@ -779,7 +816,7 @@ export function SectionLayout({
 
   return (
     <div className="mx-auto max-w-4xl flex flex-col-reverse gap-3">
-      { isModalOpen && (
+      { isModalOpen && selectedImage && (
       <div 
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={()=>{setIsModalOpen(false)}}
@@ -811,8 +848,8 @@ export function SectionLayout({
             key={`${selectedKey}-image`}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ 
-              opacity: exiting ? 0 : 1, 
-              scale: exiting ? 0.95 : 1 
+              opacity: isExiting ? 0 : 1, 
+              scale: isExiting ? 0.95 : 1 
             }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: animDuration, ease: "easeInOut" }}
@@ -822,11 +859,12 @@ export function SectionLayout({
               <motion.div
                 key={`${selectedKey}-image-prev`}
                 initial={{ x: 60 }}
-                animate={{ x: exiting ? 60 : 0 }}
+                animate={{ x: isExiting ? 60 : 0 }}
                 exit={{ x: 60 }}
                 transition={{ duration: animDuration, ease: "easeInOut" }}
               >
                 <HardShadowButton 
+                  popUpContent={null}
                   className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
                   onClick={handlePreviousImage}
                   disabled={imageLoading}
@@ -841,7 +879,7 @@ export function SectionLayout({
                   <motion.img
                     key={`${selectedKey}`}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: exiting ? 0 : (imageLoading ? 0 : 1) }}
+                    animate={{ opacity: isExiting ? 0 : (imageLoading ? 0 : 1) }}
                     exit={{ opacity: 0 }}
                     src={selectedImage.url}
                     alt={selectedImage.alt}
@@ -895,11 +933,12 @@ export function SectionLayout({
               <motion.div
                 key={`${selectedKey}-image-next`}
                 initial={{ x: -60 }}
-                animate={{ x: exiting ? -60 : 0 }}
+                animate={{ x: isExiting ? -60 : 0 }}
                 exit={{ x: -60 }}
                 transition={{ duration: animDuration, ease: "easeInOut" }}
               >
                 <HardShadowButton 
+                  popUpContent={null}
                   className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
                   onClick={handleNextImage}
                   disabled={imageLoading}
@@ -914,7 +953,7 @@ export function SectionLayout({
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ 
-          opacity: exiting ? 0 : 1, 
+          opacity: isExiting ? 0 : 1, 
         }}
         exit={{ opacity: 0, height: 0 }}
         transition={{ duration: animDuration, ease: "easeInOut" }}
@@ -925,8 +964,8 @@ export function SectionLayout({
               key={selectedKey}
               initial={{ opacity: 0, height: 0 }}
               animate={{ 
-                opacity: exiting ? 0 : 1, 
-                height: exiting ? 0 : "auto" 
+                opacity: isExiting ? 0 : 1, 
+                height: isExiting ? 0 : "auto" 
               }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: animDuration, ease: "easeInOut" }}
@@ -969,25 +1008,27 @@ export function SectionLayout({
           className="h-16 aspect-square"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
-            opacity: exiting ? 0 : 1, 
-            scale: exiting ? 0.8 : 1 
+            opacity: isExiting ? 0 : 1, 
+            scale: isExiting ? 0.8 : 1 
           }}
           transition={{ duration: animDuration, ease: "easeInOut" }}
         >
           <HardShadowButton 
+            popUpContent={null}
             rotate={3} 
             className="w-full h-16 bg-blue-50 flex items-center justify-center"
             onClick={() => handleNavigation("/")}
           >
-            <MoveLeft strokeWidth={3}/>
+            <MoveLeft className="sm:block hidden" strokeWidth={3}/>
+            <Home className="sm:hidden block" strokeWidth={3}/>
           </HardShadowButton>
         </motion.div>
         <AnimatePresence mode="wait">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ 
-              opacity: exiting ? 0 : 1, 
-              x: exiting ? 20 : 0 
+              opacity: isExiting ? 0 : 1, 
+              x: isExiting ? 20 : 0 
             }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: animDuration, ease: "easeInOut" }}
@@ -1067,8 +1108,8 @@ import {
 } from "lucide-react";
 
 export default function Contact() {
-  const [copiedField, setCopiedField] = useState(null);
-  const timeoutRef = useRef(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const contactFields = {
     "phone": {
@@ -1098,7 +1139,7 @@ export default function Contact() {
     },
   };
 
-  const handleCopy = (fieldKey, textToCopy) => {
+  const handleCopy = (fieldKey: string, textToCopy: string) => {
     navigator.clipboard.writeText(textToCopy);
     
     // Clear existing timeout
@@ -1110,7 +1151,7 @@ export default function Contact() {
     timeoutRef.current = setTimeout(() => {
       setCopiedField(null);
       timeoutRef.current = null;
-    }, 1000);
+    }, 1000) as unknown as number;
   };
 
   // Cleanup timeout on unmount
@@ -1125,6 +1166,8 @@ export default function Contact() {
   const contactData = {
     "contact": {
       title: "Contact",
+      period: "",
+      content: [],
       react: (
         <div className="flex flex-col gap-3 pb-2">
           <div className="md:hidden block">
@@ -1220,24 +1263,20 @@ export default function Dotfiles() {
 ================================================
 File: pages/HomePage.tsx
 ================================================
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { Introduction } from "@/components/Introduction";
 import { HardShadowButton } from "@/components/ui/HardShadowButton";
 import { HardShadowRect } from "@/components/ui/HardShadowRect";
 import { motion, AnimatePresence } from "motion/react";
 import { Download } from "lucide-react";
 
-const HomePage: React.FC = () => {
-  const navigate = useNavigate();
-  const [isExiting, setIsExiting] = useState(false);
-  const exitAnimDuration = 0.2;
+type ContextType = {
+  isExiting: boolean;
+  handleNavigation: (path: string) => void;
+};
 
-  const handleNavigation = (path: string) => {
-    setIsExiting(true);
-    console.log("exiting");
-    setTimeout(() => navigate(path), 1000 * exitAnimDuration);
-  };
+const HomePage: React.FC = () => {
+  const { isExiting, handleNavigation } = useOutletContext<ContextType>();
 
   const buttons = {
     dotfiles: {
@@ -1245,7 +1284,6 @@ const HomePage: React.FC = () => {
       summary: "The heart of my work: The configuration files for my linux machine",
       route: "/dotfiles",
       color: "bg-blue-50",
-
     },
     coolProjects: {
       title: "Projects",
@@ -1262,7 +1300,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-4xl sm:grid sm:grid-cols-3 flex flex-col gap-4">
+    <div className="mx-auto max-w-4xl sm:grid md:grid-cols-5 sm:grid-cols-4 flex flex-col gap-4">
       <AnimatePresence>
         {!isExiting && (
           <motion.div 
@@ -1279,7 +1317,7 @@ const HomePage: React.FC = () => {
               opacity: 0, 
               x: -200,
             }}
-            transition={{ duration: exitAnimDuration }}
+            transition={{ duration: 0.2 }}
           >
             <HardShadowButton 
               className={`bg-blue-50 w-full`}
@@ -1302,9 +1340,7 @@ const HomePage: React.FC = () => {
             </HardShadowButton>
             <HardShadowButton 
               className={`bg-blue-50 w-full`}
-              onClick={() => {
-                handleNavigation("/contact")
-              }}
+              onClick={() => handleNavigation("/contact")}
               popUpContent={
                 <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
                   All the ways you can contact me for hiring
@@ -1338,7 +1374,7 @@ const HomePage: React.FC = () => {
       <AnimatePresence>
         {!isExiting && (
           <motion.div 
-            className="col-span-2"
+            className="md:col-span-4 col-span-3"
             initial={{ 
               opacity: 0, 
               x: 200,
@@ -1351,7 +1387,7 @@ const HomePage: React.FC = () => {
               opacity: 0, 
               x: 200,
             }}
-            transition={{ duration: exitAnimDuration }}
+            transition={{ duration: 0.2 }}
           >
             <Introduction/>
           </motion.div>
