@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TopBar } from "./components/TopBar";
 import { SideBar } from "./components/SideBar";
-import { motion, AnimatePresence } from "motion/react";
+
 import { useState, useEffect } from "react";
 
 function App() {

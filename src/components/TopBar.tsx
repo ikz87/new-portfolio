@@ -1,18 +1,15 @@
-import { Link } from "react-router-dom";
 import { HardShadowButton } from './ui/HardShadowButton.tsx';
 import { HardShadowRect } from './ui/HardShadowRect.tsx';
 import { 
-  Home,
   Github,
   Linkedin,
   Mail,
   Menu,
   Code,
-  User,
 } from 'lucide-react';
 
 type TopBarProps = {
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<bool>>
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export function TopBar({
@@ -49,6 +46,7 @@ export function TopBar({
       </HardShadowRect>
           <div className="w-fit">
             <HardShadowButton 
+              popUpContent={null}
               onClick={()=>{setIsSidebarOpen(true)}}
               className="-ml-2 p-4 cursor-pointer sm:hidden bg-blue-50 h-16 flex !rounded-l-none items-center">
               <Menu 

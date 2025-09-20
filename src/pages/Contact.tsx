@@ -10,8 +10,8 @@ import {
 } from "lucide-react";
 
 export default function Contact() {
-  const [copiedField, setCopiedField] = useState(null);
-  const timeoutRef = useRef(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const contactFields = {
     "phone": {
@@ -41,7 +41,7 @@ export default function Contact() {
     },
   };
 
-  const handleCopy = (fieldKey, textToCopy) => {
+  const handleCopy = (fieldKey: string, textToCopy: string) => {
     navigator.clipboard.writeText(textToCopy);
     
     // Clear existing timeout
@@ -53,7 +53,7 @@ export default function Contact() {
     timeoutRef.current = setTimeout(() => {
       setCopiedField(null);
       timeoutRef.current = null;
-    }, 1000);
+    }, 1000) as unknown as number;
   };
 
   // Cleanup timeout on unmount
@@ -68,6 +68,8 @@ export default function Contact() {
   const contactData = {
     "contact": {
       title: "Contact",
+      period: "",
+      content: [],
       react: (
         <div className="flex flex-col gap-3 pb-2">
           <div className="md:hidden block">

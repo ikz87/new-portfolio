@@ -29,7 +29,6 @@ type SectionData = {
 type SectionLayoutProps = {
   items: Record<string, SectionData>;
   defaultSelected?: string;
-  showNavigation?: boolean;
   showPeriod?: boolean;
 };
 
@@ -41,7 +40,6 @@ type ContextType = {
 export function SectionLayout({ 
   items, 
   defaultSelected, 
-  showNavigation = true,
   showPeriod = true 
 }: SectionLayoutProps) {
   const { isExiting, handleNavigation } = useOutletContext<ContextType>();
@@ -53,7 +51,7 @@ export function SectionLayout({
   const [imageLoading, setImageLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const animDuration = 0.2
-  const timeoutRef = useRef(null);
+  const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     // Need this to keep track of whether I want
@@ -67,7 +65,7 @@ export function SectionLayout({
     timeoutRef.current = setTimeout(() => {
       setIsAnimating(false);
       timeoutRef.current = null;
-    }, animDuration*1000*2);
+    }, animDuration*1000*2) as unknown as number;
   }, [selectedKey]);
 
   const handlePreviousImage = () => {
@@ -106,7 +104,7 @@ export function SectionLayout({
 
   return (
     <div className="mx-auto max-w-4xl flex flex-col-reverse gap-3">
-      { isModalOpen && (
+      { isModalOpen && selectedImage && (
       <div 
           className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
           onClick={()=>{setIsModalOpen(false)}}
@@ -154,6 +152,7 @@ export function SectionLayout({
                 transition={{ duration: animDuration, ease: "easeInOut" }}
               >
                 <HardShadowButton 
+                  popUpContent={null}
                   className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
                   onClick={handlePreviousImage}
                   disabled={imageLoading}
@@ -227,6 +226,7 @@ export function SectionLayout({
                 transition={{ duration: animDuration, ease: "easeInOut" }}
               >
                 <HardShadowButton 
+                  popUpContent={null}
                   className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
                   onClick={handleNextImage}
                   disabled={imageLoading}
@@ -302,6 +302,7 @@ export function SectionLayout({
           transition={{ duration: animDuration, ease: "easeInOut" }}
         >
           <HardShadowButton 
+            popUpContent={null}
             rotate={3} 
             className="w-full h-16 bg-blue-50 flex items-center justify-center"
             onClick={() => handleNavigation("/")}
