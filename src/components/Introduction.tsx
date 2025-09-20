@@ -44,7 +44,7 @@ export function Introduction(){
             Opti-Grow Consulting Group, Front-end developer (September 2024 - October 2024)
           </li>
           <li>
-            SeniorThrive (April 2025 - Now)
+            SeniorThrive, Full-stack developer (April 2025 - Now)
           </li>
         </ul>
       </p>
