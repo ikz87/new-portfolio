@@ -1,6 +1,5 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { TopBar } from "./components/TopBar";
-import { HardShadowRect } from "./components/ui/HardShadowRect";
 import { SideBar } from "./components/SideBar";
 
 import { useState, useEffect } from "react";
@@ -31,12 +30,16 @@ function App() {
   
   return (
     <>
-      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 flex items-center justify-center"> 
-        <div className="">
-          <HardShadowRect className="font-extrabold text-5xl border-10 bg-amber-50 w-full p-20 rounded-xl">
-            ikz87's portfolio
-          </HardShadowRect>
+      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md::pl-6 md:pt-6 md:pr-8 pl-2 pt-2 pr-4 space-y-4">
+        <TopBar setIsSidebarOpen={setIsSidebarOpen} />
+        <div className="sm:hidden block">
+          <SideBar 
+            isSidebarOpen={isSidebarOpen} 
+            setIsSidebarOpen={setIsSidebarOpen}
+            handleNavigation={handleNavigation}
+          />
         </div>
+        <Outlet context={{ isExiting, handleNavigation }} />
       </div>
     </>
   )
