@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import { HardShadowButton } from "@/components/ui/HardShadowButton";
 import { HardShadowRect } from "@/components/ui/HardShadowRect";
-import { Download, Mail, Code, X } from "lucide-react";
+import { Download, Mail, Code, Home, X } from "lucide-react";
 
 type SideBarProps = {
   isSidebarOpen: boolean;
@@ -31,12 +31,6 @@ export function SideBar({
       title: "Work",
       summary: "Here you'll find all the jobs I've worked on. Some of the things I've developed are private, but I'll include all the details I can",
       route: "/work",
-      color: "bg-blue-50",
-    },
-    home: {
-      title: "Home",
-      summary: "Go to home page",
-      route: "/",
       color: "bg-blue-50",
     },
   };
@@ -127,6 +121,17 @@ export function SideBar({
                           </div>
                         </HardShadowButton>
                       ))}
+                      <div className="pb-4 w-16 mx-auto aspect-square flex items-center justify-center">
+                        <HardShadowButton 
+                          className={`bg-white w-full h-16 !rounded-full flex items-center justify-center`}
+                          onClick={() => {
+                              handleNavigation("/")
+                          }}
+                          popUpContent={null}
+                        >
+                          <Home strokeWidth={3} className="text-blue-600"/>
+                        </HardShadowButton>
+                      </div>
                     </div>
                   </div>
                 </HardShadowRect>

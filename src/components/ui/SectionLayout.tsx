@@ -153,11 +153,11 @@ export function SectionLayout({
               >
                 <HardShadowButton 
                   popUpContent={null}
-                  className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
+                  className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
                   onClick={handlePreviousImage}
                   disabled={imageLoading}
                 >
-                  <ChevronLeft className="w-full h-full"/>
+                  <ChevronLeft strokeWidth={3} className="w-full h-full"/>
                 </HardShadowButton>
               </motion.div>
             )}
@@ -227,11 +227,11 @@ export function SectionLayout({
               >
                 <HardShadowButton 
                   popUpContent={null}
-                  className="bg-blue-50 p-3 flex items-center justify-center h-16 aspect-square"
+                  className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
                   onClick={handleNextImage}
                   disabled={imageLoading}
                 >
-                  <ChevronRight className="w-full h-full"/>
+                  <ChevronRight strokeWidth={3} className="w-full h-full"/>
                 </HardShadowButton>
               </motion.div>
             )}
@@ -293,7 +293,7 @@ export function SectionLayout({
       </motion.div>
       <div className="w-full flex flex-row gap-3">
         <motion.div 
-          className="h-16 aspect-square"
+          className="sm:block hidden h-16 aspect-square"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: isExiting ? 0 : 1, 
