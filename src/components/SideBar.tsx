@@ -57,14 +57,14 @@ export function SideBar({
                   transition={{ type: "tween", ease: "easeInOut" }}
                   className="relative border-r-black max-w-96 border-r-3 translate-x-2 bg-amber-50 h-full w-max"
                 >
-                  <div
+                  <button
                     onClick={() => {
                       setIsSidebarOpen(false);
                     }}
                     className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3"
                   >
                     <X strokeWidth={3} />
-                  </div>
+                  </button>
                   <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-end justify-end gap-4 py-4">
                     <div className="flex flex-col-reverse items-center justify-center gap-4 w-full h-dvh">
                       <div className="w-full flex flex-col justify-center">
@@ -73,6 +73,7 @@ export function SideBar({
                             target="_blank"
                             href="mailto:i.arcia135@gmail.com"
                             className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+                            aria-label="Send email to i.arcia135@gmail.com"
                           >
                             <Mail className="text-red-600" />
                             Email me
@@ -80,6 +81,7 @@ export function SideBar({
                           <a
                             target="_blank"
                             href="https://github.com/ikz87/new-portfolio"
+                            rel="noopener noreferrer"
                             className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
                           >
                             <Code className="text-green-600" />

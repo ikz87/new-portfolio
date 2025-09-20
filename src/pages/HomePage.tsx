@@ -65,6 +65,7 @@ const HomePage: React.FC = () => {
                 link.download = "Isaac Arcia resume.pdf";
                 link.click();
               }}
+              aria-label="Download resume as PDF"
               popUpContent={
                 <HardShadowRect className="text-left w-full bg-white pt-14 p-2 ">
                   Click to download as PDF

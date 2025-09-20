@@ -56,6 +56,24 @@ export function SectionLayout({
   const timeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (isModalOpen) {
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setIsModalOpen(false);
+        }
+      };
+
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+
+      return () => {
+        document.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
+      };
+    }
+  }, [isModalOpen]);
+
+  useEffect(() => {
     // Need this to keep track of whether I want
     // overflows to show or not
     // Used only on contact page really

@@ -23,6 +23,7 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
           <a
             target="_blank"
             href="https://github.com/ikz87/new-portfolio"
+            rel="noopener noreferrer"
             className="sm:flex hidden border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
           >
             <Code className="text-green-600" />
@@ -41,6 +42,8 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
             className="border-3 rounded-full p-2 border-black text-white bg-blue-700"
             target="_blank"
             href="https://www.linkedin.com/in/isaac-arcia-9b408932a/"
+            rel="noopener noreferrer"
+            aria-label="Visit my LinkedIn profile"
           >
             <Linkedin />
           </a>
