@@ -99,7 +99,6 @@ export function SectionLayout({
 
   const selectedImage = selectedItem.images?.[imageIndex];
   const hasContent = selectedItem.content && selectedItem.content.length > 0;
-  const shouldUseReact = !hasContent && selectedItem.react;
   const hasHeaderContent = (showPeriod && selectedItem.period) || selectedItem.link;
 
   return (
@@ -278,15 +277,16 @@ export function SectionLayout({
                   )}
                 </div>
               )}
-              {shouldUseReact ? (
-                selectedItem.react
-              ) : hasContent ? (
-                <div className="flex flex-col gap-3">
+              {hasContent && (
+                <div className="flex flex-col gap-3 text-justify">
                   {selectedItem.content.map((paragraph, index) => (
                     <p key={index}>{paragraph}</p>
                   ))}
                 </div>
-              ) : null}
+              )}
+              {selectedItem.react && (
+                selectedItem.react
+              )}
             </motion.div>
           </AnimatePresence>
         </HardShadowRect>

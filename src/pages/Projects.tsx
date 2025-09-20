@@ -1,4 +1,7 @@
 import { SectionLayout } from "@/components/ui/SectionLayout";
+import {
+  FileText
+  } from "lucide-react";
 
 const projectsData = {
   "kzooting": {
@@ -15,6 +18,15 @@ const projectsData = {
       "With the kzooting complete, I developed (with the help of a cousin (ty calito <3)) a GUI desktop client written in Python using PyQt5 that allowed me to easily visualize the state of each key and configure all parameters related to key activation.",
       "The last thing I worked on for this project was a nice looking key visualizer for when I play osu! with the device. You can also check a full video with a prototype of this visualizer here.",
       "I presented this as a final project for my 'machines and computers' course. If you know spanish, you can check this document explaining every detail about the project."
+    ],
+    react: [
+      <a 
+        href="/documents/kzooting-document.pdf" download 
+        className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
+      >
+        <FileText className="text-green-400" strokeWidth={2.5}/>
+        kzooting-document.pdf
+      </a>
     ],
     images: [
       {
@@ -48,6 +60,15 @@ const projectsData = {
       "I started by assembling a base with the servomotors that could securely hold my phone in place. With that done, I wrote some code to interface with the microcontroller (a Raspberry Pi Pico) to manually move the servos so I could test the device. Then came some coding with OpenCV (in Python) and a *lot* of math to calculate the angle needed to move each servomotor so that the tracking would be as precise as possible.",
       "With the project being done, I also built a desktop app with PyQT5 to show general real time information and a 3D simulation of the tracking taking place.",
       "I presented this as a final project for my 'Control Systems' course. If you know spanish, you can check this document, where you'll find more information about the project, especially all the math behind it."
+    ],
+    react: [
+      <a 
+        href="/documents/pft-document.pdf" download 
+        className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
+      >
+        <FileText className=" text-green-400" strokeWidth={2.5}/>
+        pft-document.pdf
+      </a>
     ],
     images: [
       {
