@@ -66,7 +66,7 @@ const HomePage: React.FC = () => {
                 link.click();
               }}
               popUpContent={
-                <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                <HardShadowRect className="text-left w-full bg-white pt-14 p-2 ">
                   Click to download as PDF
                 </HardShadowRect>
               }
@@ -80,7 +80,7 @@ const HomePage: React.FC = () => {
               className={`bg-blue-50 w-full`}
               onClick={() => handleNavigation("/contact")}
               popUpContent={
-                <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                <HardShadowRect className="text-left w-full bg-white pt-14 p-2 ">
                   All the ways you can contact me for hiring
                 </HardShadowRect>
               }
@@ -95,7 +95,7 @@ const HomePage: React.FC = () => {
                 className={`${button.color} w-full`}
                 onClick={() => handleNavigation(button.route)}
                 popUpContent={
-                  <HardShadowRect className="bg-white pt-14 p-2 text-justify">
+                  <HardShadowRect className="bg-white pt-14 p-2 text-left">
                     {button.summary}
                   </HardShadowRect>
                 }

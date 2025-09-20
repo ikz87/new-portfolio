@@ -11,7 +11,7 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
     <div className="mx-auto w-full max-w-4xl flex flex-row h-16">
       <HardShadowRect className="flex items-center flex-row sm:rounded-xl rounded-l-xl w-full bg-amber-50 h-full overflow-visible">
         <div className="w-full md:text-lg flex md:gap-3 gap-2 items-center">
-          <h1 className="md:pl-3 pl-2 font-extrabold">ikz87's portfolio</h1>
+          <h1 className="pl-4 font-extrabold">ikz87's portfolio</h1>
           <a
             target="_blank"
             href="mailto:i.arcia135@gmail.com"
@@ -29,7 +29,7 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
             View source
           </a>
         </div>
-        <div className="md:pr-3 pr-2 flex flex-row md:gap-3 gap-1">
+        <div className="pr-4 flex flex-row gap-3">
           <a
             className="border-3 rounded-full p-2 bg-gray-700 text-white border-black"
             target="_blank"

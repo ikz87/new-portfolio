@@ -358,7 +358,7 @@ export function SectionLayout({
                 }
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-bold">{selectedItem.title}</span>
+                  <span className="font-extrabold">{selectedItem.title}</span>
                   <ChevronDown size={20} />
                 </div>
               </HardShadowDropdown>
