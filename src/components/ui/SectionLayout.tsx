@@ -131,6 +131,7 @@ export function SectionLayout({
               onClick={() => {
                 setIsModalOpen(false);
               }}
+              aria-label="Close image modal"
             >
               <X size={24} strokeWidth={4} />
             </motion.button>
@@ -164,6 +165,7 @@ export function SectionLayout({
                   className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
                   onClick={handlePreviousImage}
                   disabled={imageLoading}
+                  aria-label="Previous image"
                 >
                   <ChevronLeft strokeWidth={3} className="w-full h-full" />
                 </HardShadowButton>
@@ -224,6 +226,7 @@ export function SectionLayout({
                             scale: index === imageIndex ? 1.1 : 1.1,
                           }}
                           whileTap={{ scale: 0.9 }}
+                          aria-label={`Go to image ${index + 1}`}
                         />
                       ))}
                     </div>
@@ -244,6 +247,7 @@ export function SectionLayout({
                   className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
                   onClick={handleNextImage}
                   disabled={imageLoading}
+                  aria-label="Next image"
                 >
                   <ChevronRight strokeWidth={3} className="w-full h-full" />
                 </HardShadowButton>
@@ -321,6 +325,7 @@ export function SectionLayout({
             rotate={3}
             className="w-full h-16 bg-blue-50 flex items-center justify-center"
             onClick={() => handleNavigation("/")}
+            aria-label="Go to home page"
           >
             <MoveLeft className="sm:block hidden" strokeWidth={3} />
             <Home className="sm:hidden block" strokeWidth={3} />
@@ -341,6 +346,7 @@ export function SectionLayout({
               <HardShadowDropdown
                 className="bg-amber-50 p-4 w-full text-nowrap"
                 rotate={1}
+                aria-label="Select another item"
                 dropdownContent={
                   <HardShadowRect className="w-full bg-white p-2 pt-14 space-y-2">
                     {itemKeys.map((key) => (

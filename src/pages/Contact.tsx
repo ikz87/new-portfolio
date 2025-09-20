@@ -79,6 +79,7 @@ export default function Contact() {
                 } flex transition-colors flex-row gap-2 font-extrabold items-center border-3 p-2 w-full rounded-lg`}
                 rotate={1.5}
                 onClick={() => handleCopy(key, field.toCopy)}
+                aria-label={`Copy ${field.label} to clipboard`}
                 popUpContent={
                   <HardShadowRect className="text-justify w-full bg-white pt-8 p-2 ">
                     {(copiedField === key && (

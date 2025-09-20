@@ -94,6 +94,7 @@ const HomePage: React.FC = () => {
                 key={key}
                 className={`${button.color} w-full`}
                 onClick={() => handleNavigation(button.route)}
+                aria-label={`Go to ${button.title} page`}
                 popUpContent={
                   <HardShadowRect className="bg-white pt-14 p-2 text-left">
                     {button.summary}

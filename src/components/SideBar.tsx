@@ -153,8 +153,15 @@ export function SideBar({
                 </motion.div>
               </div>
               <div
+                role="button"
+                tabIndex={0}
                 onClick={() => {
                   setIsSidebarOpen(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setIsSidebarOpen(false);
+                  }
                 }}
                 className=" w-full h-full"
               ></div>

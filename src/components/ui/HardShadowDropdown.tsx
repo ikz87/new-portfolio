@@ -27,6 +27,7 @@ export function HardShadowDropdown({
         animate={isOpen ? "open" : "rest"}
         initial="rest"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
         {...props}
       >
         <div

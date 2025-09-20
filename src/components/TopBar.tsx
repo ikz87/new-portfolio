@@ -52,6 +52,7 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
           onClick={() => {
             setIsSidebarOpen(true);
           }}
+          aria-label="Open sidebar menu"
           className="-ml-2 p-4 cursor-pointer sm:hidden bg-blue-50 h-16 flex !rounded-l-none items-center"
         >
           <Menu strokeWidth={3} className="" />
