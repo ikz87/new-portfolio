@@ -64,68 +64,70 @@ export function SideBar({
                   className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3">
                   <X strokeWidth={3}/>
                 </div>
-                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4 pb-14">
-                  <div className="w-full flex flex-col justify-center">
-                    <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
-                      <a target="_blank" href="mailto:i.arcia135@gmail.com" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
-                        <Mail className="text-red-600"/>
-                        Email me
-                      </a>
-                      <a target="_blank" href="https://github.com/ikz87/new-portfolio" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
-                        <Code className="text-green-600"/>
-                        Source
-                      </a>
+                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4">
+                  <div className="flex flex-col-reverse items-center justify-center gap-4 w-full h-dvh">
+                    <div className="w-full flex flex-col justify-center">
+                      <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
+                        <a target="_blank" href="mailto:i.arcia135@gmail.com" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
+                          <Mail className="text-red-600"/>
+                          Email me
+                        </a>
+                        <a target="_blank" href="https://github.com/ikz87/new-portfolio" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
+                          <Code className="text-green-600"/>
+                          Source
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-col-reverse w-full gap-4 pr-4 pl-2">
-                    <HardShadowButton 
-                      className={`bg-blue-50 w-full`}
-                      onClick={() => {
-                        const link = document.createElement('a');
-                        link.href = '/documents/Isaac Arcia resume.pdf';
-                        link.download = 'Isaac Arcia resume.pdf';
-                        link.click();
-                      }}
-                      popUpContent={
-                        <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
-                          Click to download as PDF
-                        </HardShadowRect>
-                      }
-                    >
-                      <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-                        <Download/>
-                        Resume
-                      </div>
-                    </HardShadowButton>
-                    <HardShadowButton 
-                      className={`bg-blue-50 w-full`}
-                      onClick={() => handleNavigation("/contact")}
-                      popUpContent={
-                        <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
-                          All the ways you can contact me for hiring
-                        </HardShadowRect>
-                      }
-                    >
-                      <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-                        Contact
-                      </div>
-                    </HardShadowButton>
-                    {Object.entries(buttons).map(([key, button]) => (
+                    <div className="flex flex-col-reverse w-full gap-4 pr-4 pl-2">
                       <HardShadowButton 
-                        key={key}
-                        className={`${button.color} w-full`}
-                        onClick={() => handleNavigation(button.route)}
+                        className={`bg-blue-50 w-full`}
+                        onClick={() => {
+                          const link = document.createElement('a');
+                          link.href = '/documents/Isaac Arcia resume.pdf';
+                          link.download = 'Isaac Arcia resume.pdf';
+                          link.click();
+                        }}
                         popUpContent={
-                          <HardShadowRect className="bg-white pt-14 p-2 text-justify">
-                            {button.summary}
+                          <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                            Click to download as PDF
                           </HardShadowRect>
                         }
                       >
-                        <div className="font-extrabold p-4">
-                          {button.title}
+                        <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                          <Download/>
+                          Resume
                         </div>
                       </HardShadowButton>
-                    ))}
+                      <HardShadowButton 
+                        className={`bg-blue-50 w-full`}
+                        onClick={() => handleNavigation("/contact")}
+                        popUpContent={
+                          <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                            All the ways you can contact me for hiring
+                          </HardShadowRect>
+                        }
+                      >
+                        <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                          Contact
+                        </div>
+                      </HardShadowButton>
+                      {Object.entries(buttons).map(([key, button]) => (
+                        <HardShadowButton 
+                          key={key}
+                          className={`${button.color} w-full`}
+                          onClick={() => handleNavigation(button.route)}
+                          popUpContent={
+                            <HardShadowRect className="bg-white pt-14 p-2 text-justify">
+                              {button.summary}
+                            </HardShadowRect>
+                          }
+                        >
+                          <div className="font-extrabold p-4">
+                            {button.title}
+                          </div>
+                        </HardShadowButton>
+                      ))}
+                    </div>
                   </div>
                 </HardShadowRect>
               </motion.div>
