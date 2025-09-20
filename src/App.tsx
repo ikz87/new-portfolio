@@ -12,6 +12,7 @@ function App() {
   const exitAnimDuration = 0.2;
 
   const handleNavigation = (path: string) => {
+    setIsSidebarOpen(false);
     if (location.pathname === path){
       return;
     }
