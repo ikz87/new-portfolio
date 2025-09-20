@@ -365,7 +365,7 @@ export function SectionLayout({
             )) || (
               <HardShadowRect className="w-full p-4 bg-amber-50 rounded-xl">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold">{selectedItem.title}</span>
+                  <span className="font-extrabold">{selectedItem.title}</span>
                 </div>
               </HardShadowRect>
             )}
