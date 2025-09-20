@@ -121,9 +121,9 @@ export function SideBar({
                           </div>
                         </HardShadowButton>
                       ))}
-                      <div className="pb-4 w-16 mx-auto aspect-square flex items-center justify-center">
+                      <div className=" w-16 mx-auto aspect-square flex items-center justify-center">
                         <HardShadowButton 
-                          className={`bg-white w-full h-16 !rounded-full flex items-center justify-center`}
+                          className={`bg-white w-full h-16 flex items-center justify-center`}
                           onClick={() => {
                               handleNavigation("/")
                           }}
