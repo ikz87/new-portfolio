@@ -106,7 +106,7 @@ export function SectionLayout({
     <div className="mx-auto max-w-4xl flex flex-col-reverse gap-3">
       { isModalOpen && selectedImage && (
       <div 
-          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6 w-dvw h-screen scale-1.5 origin-center"
           onClick={()=>{setIsModalOpen(false)}}
         >
           <motion.div 
