@@ -31,7 +31,7 @@ function App() {
   
   return (
     <>
-      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md::pl-6 md:pt-6 md:pr-8 pl-2 pt-2 pr-4 space-y-4">
+      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md:pl-6 md:pt-6 md:pr-8 md:pb-8 pl-2 pt-2 pr-4 pb-4 space-y-4">
         <TopBar setIsSidebarOpen={setIsSidebarOpen} />
         <div className="sm:hidden block">
           <SideBar 
