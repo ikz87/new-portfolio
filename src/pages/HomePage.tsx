@@ -16,19 +16,22 @@ const HomePage: React.FC = () => {
   const buttons = {
     dotfiles: {
       title: "Dotfiles",
-      summary: "The heart of my work: The configuration files for my linux machine",
+      summary:
+        "The heart of my work: The configuration files for my linux machine",
       route: "/dotfiles",
       color: "bg-blue-50",
     },
     coolProjects: {
       title: "Projects",
-      summary: "These are projects I've worked on as a hobbyist. They are all open source so you can get an idea of the quality of the code I write by visiting each repo",
+      summary:
+        "These are projects I've worked on as a hobbyist. They are all open source so you can get an idea of the quality of the code I write by visiting each repo",
       route: "/projects",
       color: "bg-blue-50",
     },
     myWork: {
       title: "Work",
-      summary: "Here you'll find all the jobs I've worked on. Some of the things I've developed are private, but I'll include all the details I can",
+      summary:
+        "Here you'll find all the jobs I've worked on. Some of the things I've developed are private, but I'll include all the details I can",
       route: "/work",
       color: "bg-blue-50",
     },
@@ -38,28 +41,28 @@ const HomePage: React.FC = () => {
     <div className="mx-auto max-w-4xl sm:grid md:grid-cols-5 sm:grid-cols-4 flex flex-col gap-4">
       <AnimatePresence>
         {!isExiting && (
-          <motion.div 
+          <motion.div
             className="sm:flex hidden flex-col-reverse items-end justify-end gap-4"
-            initial={{ 
-              opacity: 0, 
+            initial={{
+              opacity: 0,
               x: -200,
             }}
-            animate={{ 
-              opacity: 1, 
+            animate={{
+              opacity: 1,
               x: 0,
             }}
-            exit={{ 
-              opacity: 0, 
+            exit={{
+              opacity: 0,
               x: -200,
             }}
             transition={{ duration: 0.2 }}
           >
-            <HardShadowButton 
+            <HardShadowButton
               className={`bg-blue-50 w-full`}
               onClick={() => {
-                const link = document.createElement('a');
-                link.href = '/documents/Isaac Arcia resume.pdf';
-                link.download = 'Isaac Arcia resume.pdf';
+                const link = document.createElement("a");
+                link.href = "/documents/Isaac Arcia resume.pdf";
+                link.download = "Isaac Arcia resume.pdf";
                 link.click();
               }}
               popUpContent={
@@ -69,11 +72,11 @@ const HomePage: React.FC = () => {
               }
             >
               <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-                <Download/>
+                <Download />
                 Resume
               </div>
             </HardShadowButton>
-            <HardShadowButton 
+            <HardShadowButton
               className={`bg-blue-50 w-full`}
               onClick={() => handleNavigation("/contact")}
               popUpContent={
@@ -87,7 +90,7 @@ const HomePage: React.FC = () => {
               </div>
             </HardShadowButton>
             {Object.entries(buttons).map(([key, button]) => (
-              <HardShadowButton 
+              <HardShadowButton
                 key={key}
                 className={`${button.color} w-full`}
                 onClick={() => handleNavigation(button.route)}
@@ -97,34 +100,32 @@ const HomePage: React.FC = () => {
                   </HardShadowRect>
                 }
               >
-                <div className="font-extrabold p-4">
-                  {button.title}
-                </div>
+                <div className="font-extrabold p-4">{button.title}</div>
               </HardShadowButton>
             ))}
           </motion.div>
         )}
       </AnimatePresence>
-      
+
       <AnimatePresence>
         {!isExiting && (
-          <motion.div 
+          <motion.div
             className="md:col-span-4 col-span-3"
-            initial={{ 
-              opacity: 0, 
+            initial={{
+              opacity: 0,
               x: 200,
             }}
-            animate={{ 
-              opacity: 1, 
+            animate={{
+              opacity: 1,
               x: 0,
             }}
-            exit={{ 
-              opacity: 0, 
+            exit={{
+              opacity: 0,
               x: 200,
             }}
             transition={{ duration: 0.2 }}
           >
-            <Introduction/>
+            <Introduction />
           </motion.div>
         )}
       </AnimatePresence>

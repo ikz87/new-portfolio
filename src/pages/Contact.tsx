@@ -2,53 +2,48 @@ import { SectionLayout } from "@/components/ui/SectionLayout";
 import { HardShadowButton } from "@/components/ui/HardShadowButton";
 import { HardShadowRect } from "@/components/ui/HardShadowRect";
 import { useState, useRef, useEffect } from "react";
-import {
-  Phone,
-  User,
-  Mail,
-  MapPin,
-} from "lucide-react";
+import { Phone, User, Mail, MapPin } from "lucide-react";
 
 export default function Contact() {
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const timeoutRef = useRef<number | null>(null);
 
   const contactFields = {
-    "phone": {
+    phone: {
       toCopy: "+505 77046930",
       label: "+505 77046930",
-      icon: <Phone />
+      icon: <Phone />,
     },
-    "businessEmail": {
+    businessEmail: {
       toCopy: "i.arcia135@gmail.com",
       label: "Business: i.arcia135@gmail.com",
-      icon: <Mail />
+      icon: <Mail />,
     },
-    "personalEmail": {
+    personalEmail: {
       toCopy: "iikz87ii@gmail.com",
       label: "Personal/Github: iikz87ii@gmail.com",
-      icon: <Mail />
+      icon: <Mail />,
     },
-    "location": {
+    location: {
       toCopy: "Chinandega, Chinandega. Nicaragua",
       label: "Chinandega, Chinandega. Nicaragua",
-      icon: <MapPin />
+      icon: <MapPin />,
     },
-    "name": {
+    name: {
       toCopy: "Isaac Antonio Arcia Castro",
       label: "Isaac Antonio Arcia Castro",
-      icon: <User />
+      icon: <User />,
     },
   };
 
   const handleCopy = (fieldKey: string, textToCopy: string) => {
     navigator.clipboard.writeText(textToCopy);
-    
+
     // Clear existing timeout
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-    
+
     setCopiedField(fieldKey);
     timeoutRef.current = setTimeout(() => {
       setCopiedField(null);
@@ -66,7 +61,7 @@ export default function Contact() {
   }, []);
 
   const contactData = {
-    "contact": {
+    contact: {
       title: "Contact",
       period: "",
       content: [],
@@ -77,41 +72,34 @@ export default function Contact() {
           </div>
           <div className="flex flex-col-reverse w-fit gap-3">
             {Object.entries(contactFields).map(([key, field]) => (
-                <HardShadowButton
-                  key={key}
-                  className={`${
-                    copiedField === key ? 'bg-green-200' : 'bg-violet-200'
-                  } flex transition-colors flex-row gap-2 font-extrabold items-center border-3 p-2 w-full rounded-lg`}
-                  rotate={1.5}
-                  onClick={() => handleCopy(key, field.toCopy)}
-                  popUpContent={
-                    <HardShadowRect className="text-justify w-full bg-white pt-8 p-2 ">
-                      { copiedField === key && (
-                      <div className="w-full text-center">
-                        Copied!
-                      </div>
-                      ) || (
+              <HardShadowButton
+                key={key}
+                className={`${
+                  copiedField === key ? "bg-green-200" : "bg-violet-200"
+                } flex transition-colors flex-row gap-2 font-extrabold items-center border-3 p-2 w-full rounded-lg`}
+                rotate={1.5}
+                onClick={() => handleCopy(key, field.toCopy)}
+                popUpContent={
+                  <HardShadowRect className="text-justify w-full bg-white pt-8 p-2 ">
+                    {(copiedField === key && (
+                      <div className="w-full text-center">Copied!</div>
+                    )) || (
                       <div className="w-full text-center">
                         Copy to clipboard
                       </div>
-                      )}
-                    </HardShadowRect>
-                    }
-                  >
-                  {field.icon}
-                  {field.label}
-                </HardShadowButton>
+                    )}
+                  </HardShadowRect>
+                }
+              >
+                {field.icon}
+                {field.label}
+              </HardShadowButton>
             ))}
           </div>
         </div>
-      )
-    }
+      ),
+    },
   };
 
-  return (
-    <SectionLayout 
-      items={contactData} 
-      defaultSelected="contact" 
-    />
-  );
+  return <SectionLayout items={contactData} defaultSelected="contact" />;
 }
