@@ -64,8 +64,8 @@ export function SideBar({
                   className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3">
                   <X strokeWidth={3}/>
                 </div>
-                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-center justify-center gap-4 py-4">
-                  <div className="flex flex-col-reverse items-center justify-center gap-4 w-full h-dvh">
+                <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-end justify-end gap-4 py-4">
+                  <div className="bg-red-200 flex flex-col-reverse items-center justify-center gap-4 w-full h-dvh">
                     <div className="w-full flex flex-col justify-center">
                       <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
                         <a target="_blank" href="mailto:i.arcia135@gmail.com" className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 ">
