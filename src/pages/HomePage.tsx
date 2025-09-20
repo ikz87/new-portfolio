@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto max-w-4xl sm:grid sm:grid-cols-3 flex flex-col gap-4">
+    <div className="mx-auto max-w-4xl sm:grid md:grid-cols-5 sm:grid-cols-4 flex flex-col gap-4">
       <AnimatePresence>
         {!isExiting && (
           <motion.div 
@@ -109,7 +109,7 @@ const HomePage: React.FC = () => {
       <AnimatePresence>
         {!isExiting && (
           <motion.div 
-            className="col-span-2"
+            className="md:col-span-4 col-span-3"
             initial={{ 
               opacity: 0, 
               x: 200,
