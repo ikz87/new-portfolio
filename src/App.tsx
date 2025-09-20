@@ -1,20 +1,43 @@
-import { useState } from 'react';
-import { Link } from "react-router-dom";
-import { HardShadowButton } from './components/ui/HardShadowButton.tsx';
-import { HardShadowRect } from './components/ui/HardShadowRect.tsx';
-import { Home } from 'lucide-react';
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { TopBar } from "./components/TopBar";
+import { SideBar } from "./components/SideBar";
+import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const exitAnimDuration = 0.2;
+
+  const handleNavigation = (path: string) => {
+    setIsExiting(true);
+    setIsSidebarOpen(false);
+    console.log("exiting");
+    setTimeout(() => navigate(path), 1000 * exitAnimDuration);
+  };
+
+  useEffect(() => {
+    setIsExiting(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    console.log(isSidebarOpen);
+  }, [isSidebarOpen]);
+  
   return (
     <>
-      <div className="h-dvh w-dvw cyan-100 p-8">
-        <div className="w-full flex">
-          <HardShadowButton className="bg-rose-200 p-4" rotate={0}>
-            <Link to="/">
-              <Home className="" strokeWidth={4}/>
-            </Link>
-          </HardShadowButton>
+      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md::pl-6 md:pt-6 md:pr-8 pl-2 pt-2 pr-4 space-y-4">
+        <TopBar setIsSidebarOpen={setIsSidebarOpen} />
+        <div className="sm:hidden block">
+          <SideBar 
+            isSidebarOpen={isSidebarOpen} 
+            setIsSidebarOpen={setIsSidebarOpen}
+            handleNavigation={handleNavigation}
+          />
         </div>
+        <Outlet context={{ isExiting, handleNavigation }} />
       </div>
     </>
   )

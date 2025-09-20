@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 type HardShadowButtonProps = {
   children: React.ReactNode;
   className?: string;
-  rotate: number
+  rotate?: number
   popUpContent: React.ReactNode;
   popUpDistance?: number;
 } & React.ComponentProps<typeof motion.button>;
@@ -11,7 +11,7 @@ type HardShadowButtonProps = {
 export function HardShadowButton({
   children,
   className = "",
-  rotate = 6,
+  rotate = 2.5,
   popUpContent,
   popUpDistance = 40,
   ...props
@@ -19,7 +19,7 @@ export function HardShadowButton({
   return (
     <>
       <motion.button
-        className={`relative cursor-pointer`}
+        className={`relative cursor-pointer w-full`}
         whileHover="hover"
         whileTap="tap"
         initial="rest"
@@ -33,7 +33,7 @@ export function HardShadowButton({
         </div>
         { popUpContent && (
           <motion.div 
-            className="absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
+            className="pointer-events-none absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
             variants={{
               rest: { height: 0 }, 
               hover: { height: "auto" },
