@@ -49,8 +49,8 @@ export function SideBar({
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            className="top-0 left-0 z-50 fixed scale-y-1.1 origin-center">
-            <div className="w-dvw h-screen flex bg-black/50 flex-row-reverse items-end justify-end">
+            className="top-0 left-0 z-50 fixed">
+            <div className="w-dvw h-screen flex bg-black/50 flex-row-reverse pb-12 items-end justify-end">
               <div className="h-full max-w-96 origin-right">
                 <motion.div 
                   initial={{x: "100%"}}
