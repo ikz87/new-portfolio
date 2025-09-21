@@ -73,9 +73,8 @@ export function MobileTopBar() {
                     <p className="font-extrabold text-blue-700">Introduction</p>
                     <p>
                       Hi, my name is Isaac Arcia and I'm an electronic engineer and self
-                      taught developer. During the pandemic in 2020, in my first year of
-                      college, I attended the in-person course CS50x.ni. Having completed the
-                      course successfully (
+                      taught developer.
+                      In 2020 I attended and successfully completed the in-person course CS50x.ni
                       <a
                         href="/documents/CS50x through CS50x.ni.pdf"
                         download
@@ -83,17 +82,11 @@ export function MobileTopBar() {
                       >
                         see my certificate
                       </a>
-                      ) I ended up developing a passion for anything coding related and thus
-                      have gathered tons of experience, but mostly from hobby-ish projects.
+                      ). Ever since then I have gathered tons of experience as a developer, althougth 
+                      mostly from passion driven projects.
                     </p>
                     <p>
-                      My actual work experience comes from as little as two years ago when I
-                      worked along a cousin of mine for a local financial institution,
-                      developing a new system for managing client loans among other things.
-                      Since then, I've been working on and off as a freelancer for other local
-                      companies. Now, as I'm about to graduate, I'm looking for a more stable,
-                      remote job as a Full-stack developer. If you like what you see here and
-                      have an open position at your company, I'd love to hear from you.
+                      I'm actively looking for a job. If you like what you see here, I'd love to hear from you.
                     </p>
                     <p className="mt-4 font-extrabold text-pink-500">Skills</p>
                     <p>
