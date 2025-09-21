@@ -56,7 +56,7 @@ const HomePage: React.FC = () => {
           }
         >
           <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
-            <Download />
+            <Download strokeWidth={3}/>
             Resume
           </div>
         </HardShadowButton>
