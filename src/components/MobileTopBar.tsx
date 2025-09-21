@@ -10,12 +10,10 @@ export function MobileTopBar() {
   
   const toggleAboutMe = () => {
     setIsAboutMeOpen(!isAboutMeOpen);
-    console.log("yay");
   };
 
   useEffect(()=>{
     setIsAboutMeOpen(false);
-    console.log("yay");
   },[location]);
 
   if (true) {

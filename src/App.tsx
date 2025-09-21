@@ -15,7 +15,6 @@ function App() {
       return;
     }
     setIsExiting(true);
-    console.log("exiting");
     setTimeout(() => navigate(path), 1000 * exitAnimDuration);
   };
 
