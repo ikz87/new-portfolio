@@ -12,7 +12,7 @@ const projectsData = {
       "After some microcontroller programming on a Raspberry Pi Pico, the first kzooting prototype was alive and working!",
       "I proceeded to modify the seven remaining switches and building a whole casing out of materials I had laying around.",
       "With the kzooting complete, I developed (with the help of a cousin (ty calito <3)) a GUI desktop client written in Python using PyQt5 that allowed me to easily visualize the state of each key and configure all parameters related to key activation.",
-      "The last thing I worked on for this project was a nice looking key visualizer for when I play osu! with the device. You can also check a full video with a prototype of this visualizer here.",
+      "The last thing I worked on for this project was a nice looking key visualizer for when I play osu! with the device.",
       "I presented this as a final project for my 'machines and computers' course. If you know spanish, you can check this document explaining every detail about the project.",
     ],
     react: [
