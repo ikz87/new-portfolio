@@ -1,15 +1,22 @@
 import { HardShadowRect } from "./ui/HardShadowRect.tsx";
 import { ChevronDown, Github, Linkedin, Mail, Code } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { useLocation } from "react-router-dom";
 
 export function MobileTopBar() {
+  const location = useLocation();
   const [isAboutMeOpen, setIsAboutMeOpen] = useState(false);
   
   const toggleAboutMe = () => {
     setIsAboutMeOpen(!isAboutMeOpen);
     console.log("yay");
   };
+
+  useEffect(()=>{
+    setIsAboutMeOpen(false);
+    console.log("yay");
+  },[location]);
 
   if (true) {
     return (
