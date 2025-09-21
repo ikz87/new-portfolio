@@ -21,7 +21,7 @@ const projectsData = {
         download
         className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
       >
-        <FileText className="text-green-400" strokeWidth={2.5} />
+        <FileText strokeWidth={2.5} />
         kzooting-document.pdf
       </a>,
     ],
@@ -64,7 +64,7 @@ const projectsData = {
         download
         className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
       >
-        <FileText className=" text-green-400" strokeWidth={2.5} />
+        <FileText strokeWidth={2.5} />
         pft-document.pdf
       </a>,
     ],
