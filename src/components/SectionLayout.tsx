@@ -4,7 +4,7 @@ import { HardShadowDropdown } from "@/components/ui/HardShadowDropdown";
 import { motion, AnimatePresence } from "motion/react";
 import {
   MoveLeft,
-  ChevronDown,
+  Menu,
   ChevronLeft,
   ChevronRight,
   Loader2,
@@ -381,7 +381,7 @@ export function SectionLayout({
               >
                 <div className="flex items-center justify-between">
                   <span className="font-extrabold">{selectedItem.title}</span>
-                  <ChevronDown size={20} />
+                  <Menu strokeWidth={3} />
                 </div>
               </HardShadowDropdown>
             )) || (
