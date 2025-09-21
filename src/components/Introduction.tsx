@@ -15,7 +15,7 @@ export function Introduction() {
         >
           see my certificate
         </a>
-        ). Ever since then I have gathered tons of experience as a developer, althougth 
+        ). Ever since then I have gathered tons of experience as a developer, although 
         mostly from passion driven projects.
       </p>
       <p>

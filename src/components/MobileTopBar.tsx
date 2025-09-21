@@ -59,8 +59,11 @@ export function MobileTopBar() {
         { isAboutMeOpen && (
           <>
             <motion.div 
-                onClick={toggleAboutMe}
-                className="z-40 fixed top-0 left-0 w-dvw h-screen bg-black/50">
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={toggleAboutMe}
+              className="z-40 fixed top-0 left-0 w-dvw h-screen bg-black/50">
             </motion.div>
             <motion.div
               className="z-40 absolute top-4 left-0 pl-4 pr-4 w-full overflow-y-hidden flex flex-col justify-end"
@@ -72,9 +75,9 @@ export function MobileTopBar() {
                   <HardShadowRect className="rounded-b-xl h-[94dvh] pt-14 overflow-y-scroll text-justify p-4 w-full bg-white ">
                     <p className="font-extrabold text-blue-700">Introduction</p>
                     <p>
-                      Hi, my name is Isaac Arcia and I'm an electronic engineer and self
+                      Hi, my name is Isaac Arcia. I'm an electronic engineer and self
                       taught developer.
-                      In 2020 I attended and successfully completed the in-person course CS50x.ni
+                      In 2020 I attended and successfully completed the in-person course CS50x.ni (
                       <a
                         href="/documents/CS50x through CS50x.ni.pdf"
                         download
@@ -82,40 +85,35 @@ export function MobileTopBar() {
                       >
                         see my certificate
                       </a>
-                      ). Ever since then I have gathered tons of experience as a developer, althougth 
+                      ). Ever since then I have gathered tons of experience as a developer, although 
                       mostly from passion driven projects.
                     </p>
                     <p>
-                      I'm actively looking for a job. If you like what you see here, I'd love to hear from you.
+                      I'm actively looking for a job. If you like what you see here and got an offer to make, I'd love to hear from you.
                     </p>
-                    <p className="mt-4 font-extrabold text-pink-500">Skills</p>
-                    <p>
-                      I have experience using the following tools:
-                      <ul className="list-disc list-outside ml-4">
-                        <li>Frontend: Svelte, React, TypeScript, Tailwind</li>
-                        <li>
-                          Backend: Python (Flask, Strawberry GraphQL, Psycopg, Prisma,
-                          FastAPI), PostgreSQL
-                        </li>
-                        <li>
-                          Infra: Supabase, Auth0, Render, AWS, Google Cloud, Bash, SSH, Linux
-                        </li>
-                      </ul>
-                    </p>
+                    <p className="mt-4 font-extrabold text-pink-500">Skills/Tools</p>
+                    <ul className="list-disc list-outside ml-4 max-w-sm">
+                      <li><span className="font-extrabold">Frontend:</span> Svelte, React, TypeScript, Tailwind</li>
+                      <li>
+                        <span className="font-extrabold">Backend:</span> Python (Flask, Strawberry GraphQL, Psycopg, Prisma,
+                        FastAPI), PostgreSQL
+                      </li>
+                      <li>
+                        <span className="font-extrabold">Infra:</span> Supabase, Auth0, Render, AWS, Google Cloud, Bash, SSH, Linux
+                      </li>
+                    </ul>
                     <p className="mt-4 font-extrabold text-green-600">Experience</p>
-                    <p>
-                      <ul className="list-disc list-outside ml-4">
-                        <li>
-                          Desarrollo Integral, Full-stack developer (August 2023 - March 2024)
-                        </li>
-                        <li>Ecuación Futuro, Front-end developer (April 2024 - July 2024)</li>
-                        <li>
-                          Opti-Grow Consulting Group, Front-end developer (September 2024 -
-                          October 2024)
-                        </li>
-                        <li>SeniorThrive, Full-stack developer (April 2025 - Now)</li>
-                      </ul>
-                    </p>
+                    <ul className="list-disc list-outside ml-4">
+                      <li>
+                        Desarrollo Integral, Full-stack developer (August 2023 - March 2024)
+                      </li>
+                      <li>Ecuación Futuro, Front-end developer (April 2024 - July 2024)</li>
+                      <li>
+                        Opti-Grow Consulting Group, Front-end developer (September 2024 -
+                        October 2024)
+                      </li>
+                      <li>SeniorThrive, Full-stack developer (April 2025 - Now)</li>
+                    </ul>
                     <p className="mt-4">
                       Please refer to my{" "}
                       <a
@@ -128,10 +126,10 @@ export function MobileTopBar() {
                       for a more detailed breakdown of my roles in the mentioned positions.
                     </p>
                   </HardShadowRect>
-              </div>
-            </motion.div>
-          </>
-        )}
+                </div>
+              </motion.div>
+            </>
+          )}
         </AnimatePresence>
         <div className="absolute w-full h-16 bg-black rounded-xl translate-x-2 translate-y-2">
         </div>
