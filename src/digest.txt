@@ -1,0 +1,1704 @@
+Directory structure:
+└── src/
+    ├── App.css
+    ├── App.tsx
+    ├── fonts.css
+    ├── index.css
+    ├── main.tsx
+    ├── vite-env.d.ts
+    ├── assets/
+    ├── components/
+    │   ├── Introduction.tsx
+    │   ├── SideBar.tsx
+    │   ├── TopBar.tsx
+    │   └── ui/
+    │       ├── HardShadowButton.tsx
+    │       ├── HardShadowDropdown.tsx
+    │       ├── HardShadowRect.tsx
+    │       ├── HardShadowText.tsx
+    │       └── SectionLayout.tsx
+    └── pages/
+        ├── AboutPage.tsx
+        ├── Contact.tsx
+        ├── Dotfiles.tsx
+        ├── HomePage.tsx
+        ├── Projects.tsx
+        └── Work.tsx
+
+================================================
+File: App.css
+================================================
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
+
+================================================
+File: App.tsx
+================================================
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { TopBar } from "./components/TopBar";
+import { SideBar } from "./components/SideBar";
+
+import { useState, useEffect } from "react";
+
+function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const exitAnimDuration = 0.2;
+
+  const handleNavigation = (path: string) => {
+    setIsSidebarOpen(false);
+    if (location.pathname === path) {
+      return;
+    }
+    setIsExiting(true);
+    console.log("exiting");
+    setTimeout(() => navigate(path), 1000 * exitAnimDuration);
+  };
+
+  useEffect(() => {
+    setIsExiting(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    console.log(isSidebarOpen);
+  }, [isSidebarOpen]);
+
+  return (
+    <>
+      <div className="hidden-scrollbar overflow-x-hidden h-dvh w-dvw bg-cyan-100 md:pl-6 md:pt-6 md:pr-8 md:pb-8 pl-2 pt-2 pr-4 pb-4 space-y-4">
+        <TopBar setIsSidebarOpen={setIsSidebarOpen} />
+        <div className="sm:hidden block">
+          <SideBar
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+            handleNavigation={handleNavigation}
+          />
+        </div>
+        <Outlet context={{ isExiting, handleNavigation }} />
+      </div>
+    </>
+  );
+}
+
+export default App;
+
+
+
+================================================
+File: fonts.css
+================================================
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+
+
+================================================
+File: index.css
+================================================
+@import "tailwindcss";
+.hidden-scrollbar {
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+================================================
+File: main.tsx
+================================================
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
+import "./fonts.css";
+import App from "./App.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import Work from "./pages/Work";
+import Projects from "./pages/Projects";
+import Dotfiles from "./pages/Dotfiles";
+import Contact from "./pages/Contact";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/work",
+        element: <Work />,
+      },
+      {
+        path: "/projects",
+        element: <Projects />,
+      },
+      {
+        path: "/dotfiles",
+        element: <Dotfiles />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
+);
+
+
+
+================================================
+File: vite-env.d.ts
+================================================
+/// <reference types="vite/client" />
+
+
+
+
+================================================
+File: components/Introduction.tsx
+================================================
+import { HardShadowRect } from "./ui/HardShadowRect";
+
+export function Introduction() {
+  return (
+    <HardShadowRect className="text-justify bg-white p-4 rounded-xl w-full flex flex-col gap-2">
+      <p className="font-extrabold text-blue-700">Introduction</p>
+      <p>
+        Hi, my name is Isaac Arcia and I'm an electronic engineer and self
+        taught developer. During the pandemic in 2020, in my first year of
+        college, I attended the in-person course CS50x.ni. Having completed the
+        course successfully (
+        <a
+          href="/documents/CS50x through CS50x.ni.pdf"
+          download
+          className="text-blue-700 underline"
+        >
+          see my certificate
+        </a>
+        ) I ended up developing a passion for anything coding related and thus
+        have gathered tons of experience, but mostly from hobby-ish projects.
+      </p>
+      <p>
+        My actual work experience comes from as little as two years ago when I
+        worked along a cousin of mine for a local financial institution,
+        developing a new system for managing client loans among other things.
+        Since then, I've been working on and off as a freelancer for other local
+        companies. Now, as I'm about to graduate, I'm looking for a more stable,
+        remote job as a Full-stack developer. If you like what you see here and
+        have an open position at your company, I'd love to hear from you.
+      </p>
+      <p className="mt-4 font-extrabold text-pink-500">Skills</p>
+      <p>
+        I have experience using the following tools:
+        <ul className="list-disc list-outside ml-4">
+          <li>Frontend: Svelte, React, TypeScript, Tailwind</li>
+          <li>
+            Backend: Python (Flask, Strawberry GraphQL, Psycopg, Prisma,
+            FastAPI), PostgreSQL
+          </li>
+          <li>
+            Infra: Supabase, Auth0, Render, AWS, Google Cloud, Bash, SSH, Linux
+          </li>
+        </ul>
+      </p>
+      <p className="mt-4 font-extrabold text-green-600">Experience</p>
+      <p>
+        <ul className="list-disc list-outside ml-4">
+          <li>
+            Desarrollo Integral, Full-stack developer (August 2023 - March 2024)
+          </li>
+          <li>Ecuación Futuro, Front-end developer (April 2024 - July 2024)</li>
+          <li>
+            Opti-Grow Consulting Group, Front-end developer (September 2024 -
+            October 2024)
+          </li>
+          <li>SeniorThrive, Full-stack developer (April 2025 - Now)</li>
+        </ul>
+      </p>
+      <p className="mt-4">
+        Please refer to my{" "}
+        <a
+          href="/documents/Isaac Arcia resume.pdf"
+          download
+          className="text-blue-700 underline"
+        >
+          resume
+        </a>{" "}
+        for a more detailed breakdown of my roles in the mentioned positions.
+      </p>
+    </HardShadowRect>
+  );
+}
+
+
+
+================================================
+File: components/SideBar.tsx
+================================================
+import { motion, AnimatePresence } from "motion/react";
+import { HardShadowButton } from "@/components/ui/HardShadowButton";
+import { HardShadowRect } from "@/components/ui/HardShadowRect";
+import { Download, Mail, Code, Home, X } from "lucide-react";
+
+type SideBarProps = {
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleNavigation: (path: string) => void;
+};
+
+export function SideBar({
+  isSidebarOpen,
+  setIsSidebarOpen,
+  handleNavigation,
+}: SideBarProps) {
+  const buttons = {
+    dotfiles: {
+      title: "Dotfiles",
+      summary:
+        "The heart of my work: The configuration files for my linux machine",
+      route: "/dotfiles",
+      color: "bg-blue-50",
+    },
+    coolProjects: {
+      title: "Projects",
+      summary:
+        "These are projects I've worked on as a hobbyist. They are all open source so you can get an idea of the quality of the code I write by visiting each repo",
+      route: "/projects",
+      color: "bg-blue-50",
+    },
+    myWork: {
+      title: "Work",
+      summary:
+        "Here you'll find all the jobs I've worked on. Some of the things I've developed are private, but I'll include all the details I can",
+      route: "/work",
+      color: "bg-blue-50",
+    },
+  };
+
+  return (
+    <>
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="top-0 left-0 z-50 fixed"
+          >
+            <div className="w-dvw h-screen flex bg-black/50 flex-row-reverse items-end justify-end">
+              <div className="h-full max-w-96 origin-right">
+                <motion.div
+                  initial={{ x: "100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: "100%" }}
+                  transition={{ type: "tween", ease: "easeInOut" }}
+                  className="relative border-r-black max-w-96 border-r-3 translate-x-2 bg-amber-50 h-full w-max"
+                >
+                  <div
+                    onClick={() => {
+                      setIsSidebarOpen(false);
+                    }}
+                    className="absolute flex items-center cursor-pointer justify-center bg-white z-20 top-2 right-2 h-10 aspect-square rounded-full border-3"
+                  >
+                    <X strokeWidth={3} />
+                  </div>
+                  <HardShadowRect className="w-full h-full border-y-0 bg-amber-50 flex flex-col-reverse items-end justify-end gap-4 py-4">
+                    <div className="flex flex-col-reverse items-center justify-center gap-4 w-full h-dvh">
+                      <div className="w-full flex flex-col justify-center">
+                        <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
+                          <a
+                            target="_blank"
+                            href="mailto:i.arcia135@gmail.com"
+                            className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+                          >
+                            <Mail className="text-red-600" />
+                            Email me
+                          </a>
+                          <a
+                            target="_blank"
+                            href="https://github.com/ikz87/new-portfolio"
+                            className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+                          >
+                            <Code className="text-green-600" />
+                            Source
+                          </a>
+                        </div>
+                      </div>
+                      <div className="flex flex-col-reverse w-full gap-4 pr-4 pl-2">
+                        <HardShadowButton
+                          className={`bg-blue-50 w-full`}
+                          onClick={() => {
+                            const link = document.createElement("a");
+                            link.href = "/documents/Isaac Arcia resume.pdf";
+                            link.download = "Isaac Arcia resume.pdf";
+                            link.click();
+                          }}
+                          popUpContent={
+                            <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                              Click to download as PDF
+                            </HardShadowRect>
+                          }
+                        >
+                          <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                            <Download />
+                            Resume
+                          </div>
+                        </HardShadowButton>
+                        <HardShadowButton
+                          className={`bg-blue-50 w-full`}
+                          onClick={() => handleNavigation("/contact")}
+                          popUpContent={
+                            <HardShadowRect className="text-justify w-full bg-white pt-14 p-2 ">
+                              All the ways you can contact me for hiring
+                            </HardShadowRect>
+                          }
+                        >
+                          <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                            Contact
+                          </div>
+                        </HardShadowButton>
+                        {Object.entries(buttons).map(([key, button]) => (
+                          <HardShadowButton
+                            key={key}
+                            className={`${button.color} w-full`}
+                            onClick={() => handleNavigation(button.route)}
+                            popUpContent={
+                              <HardShadowRect className="bg-white pt-14 p-2 text-justify">
+                                {button.summary}
+                              </HardShadowRect>
+                            }
+                          >
+                            <div className="font-extrabold p-4">
+                              {button.title}
+                            </div>
+                          </HardShadowButton>
+                        ))}
+                        <div className=" w-16 mx-auto aspect-square flex items-center justify-center">
+                          <HardShadowButton
+                            className={`bg-white w-full h-16 flex items-center justify-center`}
+                            onClick={() => {
+                              handleNavigation("/");
+                            }}
+                            popUpContent={null}
+                          >
+                            <Home strokeWidth={3} className="text-blue-600" />
+                          </HardShadowButton>
+                        </div>
+                      </div>
+                    </div>
+                  </HardShadowRect>
+                </motion.div>
+              </div>
+              <div
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                  setIsSidebarOpen(false);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setIsSidebarOpen(false);
+                  }
+                }}
+                className=" w-full h-full"
+              ></div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+
+
+================================================
+File: components/TopBar.tsx
+================================================
+import { HardShadowButton } from "./ui/HardShadowButton.tsx";
+import { HardShadowRect } from "./ui/HardShadowRect.tsx";
+import { Github, Linkedin, Mail, Menu, Code } from "lucide-react";
+
+type TopBarProps = {
+  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export function TopBar({ setIsSidebarOpen }: TopBarProps) {
+  return (
+    <div className="mx-auto w-full max-w-4xl flex flex-row h-16">
+      <HardShadowRect className="flex items-center flex-row sm:rounded-xl rounded-l-xl w-full bg-amber-50 h-full overflow-visible">
+        <div className="w-full md:text-lg flex md:gap-3 gap-2 items-center">
+          <h1 className="pl-4 font-extrabold">ikz87's portfolio</h1>
+          <a
+            target="_blank"
+            href="mailto:i.arcia135@gmail.com"
+            className="sm:flex hidden border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+          >
+            <Mail className="text-red-600" />
+            i.arcia135@gmail.com
+          </a>
+          <a
+            target="_blank"
+            href="https://github.com/ikz87/new-portfolio"
+            className="sm:flex hidden border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+          >
+            <Code className="text-green-600" />
+            View source
+          </a>
+        </div>
+        <div className="pr-4 flex flex-row gap-3">
+          <a
+            className="border-3 rounded-full p-2 bg-gray-700 text-white border-black"
+            target="_blank"
+            href="https://github.com/ikz87"
+          >
+            <Github />
+          </a>
+          <a
+            className="border-3 rounded-full p-2 border-black text-white bg-blue-700"
+            target="_blank"
+            href="https://www.linkedin.com/in/isaac-arcia-9b408932a/"
+          >
+            <Linkedin />
+          </a>
+        </div>
+      </HardShadowRect>
+      <div className="w-fit">
+        <HardShadowButton
+          popUpContent={null}
+          onClick={() => {
+            setIsSidebarOpen(true);
+          }}
+          aria-label="Open sidebar menu"
+          className="-ml-2 p-4 cursor-pointer sm:hidden bg-blue-50 h-16 flex !rounded-l-none items-center"
+        >
+          <Menu strokeWidth={3} className="" />
+        </HardShadowButton>
+      </div>
+    </div>
+  );
+}
+
+
+
+================================================
+File: components/ui/HardShadowButton.tsx
+================================================
+import { motion } from "motion/react";
+
+type HardShadowButtonProps = {
+  children: React.ReactNode;
+  className?: string;
+  rotate?: number;
+  popUpContent: React.ReactNode;
+  popUpDistance?: number;
+} & React.ComponentProps<typeof motion.button>;
+
+export function HardShadowButton({
+  children,
+  className = "",
+  rotate = 2.5,
+  popUpContent,
+  popUpDistance = 40,
+  ...props
+}: HardShadowButtonProps) {
+  return (
+    <>
+      <motion.button
+        className={`relative cursor-pointer w-full`}
+        whileHover="hover"
+        whileTap="tap"
+        initial="rest"
+        {...props}
+      >
+        <div
+          className={`bg-black opacity-1 top-0 left-0 pointer-events-none translate-y-2 translate-x-2 border-4 rounded-xl ${className}`}
+        >
+          {children}
+        </div>
+        <div
+          className={`absolute brightness-0 top-0 left-0 translate-y-2 translate-x-2 border-4 rounded-xl border-black ${className}`}
+        >
+          {children}
+        </div>
+        {popUpContent && (
+          <motion.div
+            className="pointer-events-none absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
+            variants={{
+              rest: { height: 0 },
+              hover: { height: "auto" },
+            }}
+          >
+            <div className="pb-2">{popUpContent}</div>
+          </motion.div>
+        )}
+        <motion.div
+          className={`origin-top-left absolute top-0 left-0 border-4 rounded-xl border-black overflow-hidden ${className}`}
+          variants={{
+            rest: {
+              rotate: 0,
+              y: 0,
+              x: 0,
+            },
+            hover: { rotate: -rotate },
+            tap: {
+              y: 7,
+              x: 7,
+              rotate: 0,
+            },
+          }}
+        >
+          {children}
+        </motion.div>
+      </motion.button>
+    </>
+  );
+}
+
+
+
+================================================
+File: components/ui/HardShadowDropdown.tsx
+================================================
+import { motion } from "motion/react";
+import { useState } from "react";
+
+type HardShadowDropdownProps = {
+  children: React.ReactNode;
+  className?: string;
+  rotate?: number;
+  dropdownContent: React.ReactNode;
+  dropdownDistance?: number;
+} & React.ComponentProps<typeof motion.button>;
+
+export function HardShadowDropdown({
+  children,
+  className = "",
+  rotate = 2.5,
+  dropdownContent,
+  dropdownDistance = 40,
+  ...props
+}: HardShadowDropdownProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <motion.button
+        className={`relative cursor-pointer w-full`}
+        whileHover={!isOpen ? "hover" : undefined}
+        animate={isOpen ? "open" : "rest"}
+        initial="rest"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        {...props}
+      >
+        <div
+          className={`bg-black opacity-1 top-0 left-0 pointer-events-none translate-y-2 translate-x-2 border-4 rounded-xl ${className}`}
+        >
+          {children}
+        </div>
+        <div
+          className={`absolute brightness-0 top-0 left-0 translate-y-2 translate-x-2 border-4 rounded-xl border-black ${className}`}
+        >
+          {children}
+        </div>
+
+        {dropdownContent && (
+          <motion.div
+            className="z-30 absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
+            variants={{
+              rest: { height: 0 },
+              open: { height: "auto" },
+            }}
+          >
+            <div className="pb-2">{dropdownContent}</div>
+          </motion.div>
+        )}
+
+        <motion.div
+          className={`z-40 origin-top-left absolute top-0 left-0 border-4 rounded-xl border-black overflow-hidden ${className}`}
+          variants={{
+            rest: {
+              rotate: 0,
+              y: 0,
+              x: 0,
+            },
+            hover: { rotate: -rotate },
+            open: {
+              y: 7,
+              x: 7,
+              rotate: 0,
+            },
+          }}
+        >
+          {children}
+        </motion.div>
+      </motion.button>
+    </>
+  );
+}
+
+
+
+================================================
+File: components/ui/HardShadowRect.tsx
+================================================
+import React from "react";
+
+type HardShadowRectProps = {
+  children: React.ReactNode;
+  className: string;
+};
+
+export function HardShadowRect({
+  children,
+  className = "",
+}: HardShadowRectProps) {
+  return (
+    <>
+      <div className="relative transition-all h-full w-full">
+        <div
+          className={`overflow-hidden transition-all bg-black opacity-0 top-0 left-0 pointer-events-none translate-y-2 translate-x-2 border-4 ${className}`}
+        >
+          {children}
+        </div>
+        <div
+          className={`overflow-hidden transition-all absolute brightness-0 top-0 left-0 translate-y-2 translate-x-2 border-4 border-black ${className}`}
+        >
+          {children}
+        </div>
+        <div
+          className={`transition-all absolute top-0 left-0 border-4 border-black overflow-hidden ${className}`}
+        >
+          {children}
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+
+================================================
+File: components/ui/HardShadowText.tsx
+================================================
+import React from "react";
+
+type HardShadowTextProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
+export function HardShadowText({ children, className }: HardShadowTextProps) {
+  return (
+    <div className={className}>
+      <div className="relative">
+        <div
+          className="opacity-0 top-0 left-0 pointer-events-none translate-y-1 translate-x-1"
+          aria-hidden="true"
+        >
+          {children}
+        </div>
+        <div
+          className="absolute brightness-0 top-0 left-0 translate-y-0.5 translate-x-0.5 "
+          aria-hidden="true"
+        >
+          {children}
+        </div>
+        <div
+          className="absolute brightness-0 top-0 left-0 translate-y-1 translate-x-1 "
+          aria-hidden="true"
+        >
+          {children}
+        </div>
+        <div className="absolute top-0 left-0 ">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+
+
+================================================
+File: components/ui/SectionLayout.tsx
+================================================
+import { HardShadowRect } from "@/components/ui/HardShadowRect";
+import { HardShadowButton } from "@/components/ui/HardShadowButton";
+import { HardShadowDropdown } from "@/components/ui/HardShadowDropdown";
+import { motion, AnimatePresence } from "motion/react";
+import {
+  MoveLeft,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+  Home,
+  X,
+} from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+
+type SectionData = {
+  title: string;
+  period: string;
+  content: string[];
+  link?: string;
+  images?: {
+    url: string;
+    alt: string;
+  }[];
+  react?: React.ReactNode;
+};
+
+type SectionLayoutProps = {
+  items: Record<string, SectionData>;
+  defaultSelected?: string;
+  showPeriod?: boolean;
+};
+
+type ContextType = {
+  isExiting: boolean;
+  handleNavigation: (path: string) => void;
+};
+
+export function SectionLayout({
+  items,
+  defaultSelected,
+  showPeriod = true,
+}: SectionLayoutProps) {
+  const { isExiting, handleNavigation } = useOutletContext<ContextType>();
+  const itemKeys = Object.keys(items);
+  const [selectedKey, setSelectedKey] = useState(
+    defaultSelected || itemKeys[0],
+  );
+  const [isAnimating, setIsAnimating] = useState(true);
+  const selectedItem = items[selectedKey];
+  const [imageIndex, setImageIndex] = useState(0);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const animDuration = 0.2;
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    // Need this to keep track of whether I want
+    // overflows to show or not
+    // Used only on contact page really
+    setIsAnimating(true);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setImageIndex(0);
+    timeoutRef.current = setTimeout(
+      () => {
+        setIsAnimating(false);
+        timeoutRef.current = null;
+      },
+      animDuration * 1000 * 2,
+    ) as unknown as number;
+  }, [selectedKey]);
+
+  const handlePreviousImage = () => {
+    if (selectedItem.images && !imageLoading) {
+      setImageLoading(true);
+      setImageIndex((prev) =>
+        prev > 0 ? prev - 1 : selectedItem.images!.length - 1,
+      );
+    }
+  };
+
+  const handleNextImage = () => {
+    if (selectedItem.images && !imageLoading) {
+      setImageLoading(true);
+      setImageIndex((prev) =>
+        prev < selectedItem.images!.length - 1 ? prev + 1 : 0,
+      );
+    }
+  };
+
+  const handleDotClick = (index: number) => {
+    if (!imageLoading && index !== imageIndex) {
+      setImageLoading(true);
+      setImageIndex(index);
+    }
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
+  const selectedImage = selectedItem.images?.[imageIndex];
+  const hasContent = selectedItem.content && selectedItem.content.length > 0;
+  const hasHeaderContent =
+    (showPeriod && selectedItem.period) || selectedItem.link;
+
+  return (
+    <div className="mx-auto max-w-4xl flex flex-col-reverse gap-3">
+      {isModalOpen && selectedImage && (
+        <div
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 w-dvw h-screen pb-12"
+          onClick={() => {
+            setIsModalOpen(false);
+          }}
+        >
+          <motion.div
+            className="relative w-full max-w-7xl aspect-video"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage.url}
+              alt="Full size"
+              className="w-full aspect-video object-cover rounded-xl border-4 border-black"
+            />
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="cursor-pointer absolute -top-4 -right-4 bg-white border-4 border-black rounded-full p-1"
+              onClick={() => {
+                setIsModalOpen(false);
+              }}
+              aria-label="Close image modal"
+            >
+              <X size={24} strokeWidth={4} />
+            </motion.button>
+          </motion.div>
+        </div>
+      )}
+
+      <AnimatePresence mode="wait">
+        {selectedImage && (
+          <motion.div
+            key={`${selectedKey}-image`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{
+              opacity: isExiting ? 0 : 1,
+              scale: isExiting ? 0.95 : 1,
+            }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: animDuration, ease: "easeInOut" }}
+            className="flex flex-row items-center gap-3 mx-auto max-w-xl w-full"
+          >
+            {selectedItem.images && selectedItem.images.length > 1 && (
+              <motion.div
+                key={`${selectedKey}-image-prev`}
+                initial={{ x: 60 }}
+                animate={{ x: isExiting ? 60 : 0 }}
+                exit={{ x: 60 }}
+                transition={{ duration: animDuration, ease: "easeInOut" }}
+              >
+                <HardShadowButton
+                  popUpContent={null}
+                  className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
+                  onClick={handlePreviousImage}
+                  disabled={imageLoading}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft strokeWidth={3} className="w-full h-full" />
+                </HardShadowButton>
+              </motion.div>
+            )}
+            <div className="w-full">
+              <HardShadowRect
+                className={`${selectedItem.images && selectedItem.images.length > 1 ? "rounded-t-xl" : "rounded-xl"} w-full z-10 bg-black hover:border-blue-400 transition-all`}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={`${selectedKey}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isExiting ? 0 : imageLoading ? 0 : 1 }}
+                    exit={{ opacity: 0 }}
+                    src={selectedImage.url}
+                    alt={selectedImage.alt}
+                    className="w-full object-cover aspect-video cursor-pointer"
+                    onLoad={handleImageLoad}
+                    onClick={() => {
+                      setIsModalOpen(true);
+                    }}
+                  />
+                </AnimatePresence>
+
+                <AnimatePresence>
+                  {imageLoading && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.1 }}
+                      className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm"
+                    >
+                      <Loader2
+                        className="w-8 h-8 text-white animate-spin"
+                        strokeWidth={3}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </HardShadowRect>
+              {selectedItem.images && selectedItem.images.length > 1 && (
+                <HardShadowRect className="z-20 w-full h-12 rounded-b-xl border-t-0 bg-blue-50 flex items-center justify-center">
+                  {selectedItem.images && selectedItem.images.length > 1 && (
+                    <div className="flex items-center gap-2">
+                      {selectedItem.images.map((_, index) => (
+                        <motion.button
+                          key={index}
+                          className={`cursor-pointer w-4 h-4 rounded-full transition-all duration-200 ${
+                            index === imageIndex
+                              ? "bg-black scale-125"
+                              : "bg-black/30 hover:bg-black-50"
+                          }`}
+                          onClick={() => handleDotClick(index)}
+                          disabled={imageLoading}
+                          whileHover={{
+                            scale: index === imageIndex ? 1.1 : 1.1,
+                          }}
+                          whileTap={{ scale: 0.9 }}
+                          aria-label={`Go to image ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </HardShadowRect>
+              )}
+            </div>
+            {selectedItem.images && selectedItem.images.length > 1 && (
+              <motion.div
+                key={`${selectedKey}-image-next`}
+                initial={{ x: -60 }}
+                animate={{ x: isExiting ? -60 : 0 }}
+                exit={{ x: -60 }}
+                transition={{ duration: animDuration, ease: "easeInOut" }}
+              >
+                <HardShadowButton
+                  popUpContent={null}
+                  className="bg-blue-50 sm:p-3 p-2 flex items-center justify-center sm:h-16 h-12 aspect-square"
+                  onClick={handleNextImage}
+                  disabled={imageLoading}
+                  aria-label="Next image"
+                >
+                  <ChevronRight strokeWidth={3} className="w-full h-full" />
+                </HardShadowButton>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: isExiting ? 0 : 1,
+        }}
+        exit={{ opacity: 0, height: 0 }}
+        transition={{ duration: animDuration, ease: "easeInOut" }}
+      >
+        <HardShadowRect
+          className={`rounded-xl w-full bg-white p-4 flex flex-col gap-4 ${isAnimating ? "" : "overflow-visible"}`}
+        >
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedKey}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{
+                opacity: isExiting ? 0 : 1,
+                height: isExiting ? 0 : "auto",
+              }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: animDuration, ease: "easeInOut" }}
+              className="flex flex-col gap-4"
+            >
+              {hasHeaderContent && (
+                <div className="flex flex-col gap-2">
+                  {showPeriod && selectedItem.period && (
+                    <h3 className="font-extrabold text-blue-700">
+                      ({selectedItem.period})
+                    </h3>
+                  )}
+                  {selectedItem.link && (
+                    <a
+                      href={selectedItem.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 underline hover:text-blue-700"
+                    >
+                      {selectedItem.link}
+                    </a>
+                  )}
+                </div>
+              )}
+              {hasContent && (
+                <div className="flex flex-col gap-3 text-justify">
+                  {selectedItem.content.map((paragraph, index) => (
+                    <p key={index}>{paragraph}</p>
+                  ))}
+                </div>
+              )}
+              {selectedItem.react && selectedItem.react}
+            </motion.div>
+          </AnimatePresence>
+        </HardShadowRect>
+      </motion.div>
+      <div className="w-full flex flex-row gap-3">
+        <motion.div
+          className="sm:block hidden h-16 aspect-square"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{
+            opacity: isExiting ? 0 : 1,
+            scale: isExiting ? 0.8 : 1,
+          }}
+          transition={{ duration: animDuration, ease: "easeInOut" }}
+        >
+          <HardShadowButton
+            popUpContent={null}
+            rotate={3}
+            className="w-full h-16 bg-blue-50 flex items-center justify-center"
+            onClick={() => handleNavigation("/")}
+            aria-label="Go to home page"
+          >
+            <MoveLeft className="sm:block hidden" strokeWidth={3} />
+            <Home className="sm:hidden block" strokeWidth={3} />
+          </HardShadowButton>
+        </motion.div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{
+              opacity: isExiting ? 0 : 1,
+              x: isExiting ? 20 : 0,
+            }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: animDuration, ease: "easeInOut" }}
+            className="flex-1"
+          >
+            {(Object.keys(items).length > 1 && (
+              <HardShadowDropdown
+                className="bg-amber-50 p-4 w-full text-nowrap"
+                rotate={1}
+                aria-label="Select another item"
+                dropdownContent={
+                  <HardShadowRect className="w-full bg-white p-2 pt-14 space-y-2">
+                    {itemKeys.map((key) => (
+                      <div
+                        key={key}
+                        className={`p-2 hover:bg-gray-100 rounded cursor-pointer ${
+                          selectedKey === key ? "bg-blue-100" : ""
+                        }`}
+                        onClick={() => setSelectedKey(key)}
+                      >
+                        <span>{items[key].title}</span>
+                      </div>
+                    ))}
+                  </HardShadowRect>
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold">{selectedItem.title}</span>
+                  <ChevronDown size={20} />
+                </div>
+              </HardShadowDropdown>
+            )) || (
+              <HardShadowRect className="w-full p-4 bg-amber-50 rounded-xl">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold">{selectedItem.title}</span>
+                </div>
+              </HardShadowRect>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+
+
+================================================
+File: pages/AboutPage.tsx
+================================================
+import React from "react";
+
+const AboutPage: React.FC = () => {
+  return (
+    <div>
+      <h1>About Page</h1>
+      <p>This is the about page.</p>
+    </div>
+  );
+};
+
+export default AboutPage;
+
+
+
+================================================
+File: pages/Contact.tsx
+================================================
+import { SectionLayout } from "@/components/ui/SectionLayout";
+import { HardShadowButton } from "@/components/ui/HardShadowButton";
+import { HardShadowRect } from "@/components/ui/HardShadowRect";
+import { useState, useRef, useEffect } from "react";
+import { Phone, User, Mail, MapPin } from "lucide-react";
+
+export default function Contact() {
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+  const timeoutRef = useRef<number | null>(null);
+
+  const contactFields = {
+    phone: {
+      toCopy: "+505 77046930",
+      label: "+505 77046930",
+      icon: <Phone />,
+    },
+    businessEmail: {
+      toCopy: "i.arcia135@gmail.com",
+      label: "Business: i.arcia135@gmail.com",
+      icon: <Mail />,
+    },
+    personalEmail: {
+      toCopy: "iikz87ii@gmail.com",
+      label: "Personal/Github: iikz87ii@gmail.com",
+      icon: <Mail />,
+    },
+    location: {
+      toCopy: "Chinandega, Chinandega. Nicaragua",
+      label: "Chinandega, Chinandega. Nicaragua",
+      icon: <MapPin />,
+    },
+    name: {
+      toCopy: "Isaac Antonio Arcia Castro",
+      label: "Isaac Antonio Arcia Castro",
+      icon: <User />,
+    },
+  };
+
+  const handleCopy = (fieldKey: string, textToCopy: string) => {
+    navigator.clipboard.writeText(textToCopy);
+
+    // Clear existing timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    setCopiedField(fieldKey);
+    timeoutRef.current = setTimeout(() => {
+      setCopiedField(null);
+      timeoutRef.current = null;
+    }, 1000) as unknown as number;
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
+
+  const contactData = {
+    contact: {
+      title: "Contact",
+      period: "",
+      content: [],
+      react: (
+        <div className="flex flex-col gap-3 pb-2">
+          <div className="md:hidden block">
+            Click any field to copy to clipboard
+          </div>
+          <div className="flex flex-col-reverse w-fit gap-3">
+            {Object.entries(contactFields).map(([key, field]) => (
+              <HardShadowButton
+                key={key}
+                className={`${
+                  copiedField === key ? "bg-green-200" : "bg-violet-200"
+                } flex transition-colors flex-row gap-2 font-extrabold items-center border-3 p-2 w-full rounded-lg`}
+                rotate={1.5}
+                onClick={() => handleCopy(key, field.toCopy)}
+                aria-label={`Copy ${field.label} to clipboard`}
+                popUpContent={
+                  <HardShadowRect className="text-justify w-full bg-white pt-8 p-2 ">
+                    {(copiedField === key && (
+                      <div className="w-full text-center">Copied!</div>
+                    )) || (
+                      <div className="w-full text-center">
+                        Copy to clipboard
+                      </div>
+                    )}
+                  </HardShadowRect>
+                }
+              >
+                {field.icon}
+                {field.label}
+              </HardShadowButton>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+  };
+
+  return <SectionLayout items={contactData} defaultSelected="contact" />;
+}
+
+
+
+================================================
+File: pages/Dotfiles.tsx
+================================================
+import { SectionLayout } from "@/components/ui/SectionLayout";
+
+const dotfilesData = {
+  dotfiles: {
+    title: "Dotfiles",
+    period: "",
+    link: "https://github.com/ikz87/dots-2.0",
+    content: [
+      "This had to be in its own section, because that's just how much I love this very niche part of coding as a hobby.",
+      "For the uninitiated, the term 'dotfiles' usually refers to everything inside the ~/.config/ folder in linux, meaning, every file that *configures* your apps/programs. For a programer and linux power user like me, configuring these files (usually called ricing) is nothing short of an art form.",
+      "I've spent countless hours making what I consider to be my end game rice, which I've been using for about 3 years at this point.",
+      "My rice consists of a BSPWM and EWW setup that automatically generates a colorscheme for every important program I use based on my current wallpaper. My rice is like a home, it's where I work from and it's honestly one of the things that motivates me every time I sit down to code.",
+    ],
+    images: [
+      {
+        url: "/images/rice-ryo.gif",
+        alt: "A GIF showcasing my rice in real time",
+      },
+      {
+        url: "/images/rice-ultrakill.webp",
+        alt: "Screenshot showcasing my rice",
+      },
+      {
+        url: "/images/rice-planets.webp",
+        alt: "Screenshot showcasing my rice",
+      },
+    ],
+  },
+};
+
+export default function Dotfiles() {
+  return <SectionLayout items={dotfilesData} defaultSelected="dotfiles" />;
+}
+
+
+
+================================================
+File: pages/HomePage.tsx
+================================================
+import { useOutletContext } from "react-router-dom";
+import { Introduction } from "@/components/Introduction";
+import { HardShadowButton } from "@/components/ui/HardShadowButton";
+import { HardShadowRect } from "@/components/ui/HardShadowRect";
+import { motion, AnimatePresence } from "motion/react";
+import { Download } from "lucide-react";
+
+type ContextType = {
+  isExiting: boolean;
+  handleNavigation: (path: string) => void;
+};
+
+const HomePage: React.FC = () => {
+  const { isExiting, handleNavigation } = useOutletContext<ContextType>();
+
+  const buttons = {
+    dotfiles: {
+      title: "Dotfiles",
+      summary:
+        "The heart of my work: The configuration files for my linux machine",
+      route: "/dotfiles",
+      color: "bg-blue-50",
+    },
+    coolProjects: {
+      title: "Projects",
+      summary:
+        "These are projects I've worked on as a hobbyist. They are all open source so you can get an idea of the quality of the code I write by visiting each repo",
+      route: "/projects",
+      color: "bg-blue-50",
+    },
+    myWork: {
+      title: "Work",
+      summary:
+        "Here you'll find all the jobs I've worked on. Some of the things I've developed are private, but I'll include all the details I can",
+      route: "/work",
+      color: "bg-blue-50",
+    },
+  };
+
+  return (
+    <div className="mx-auto max-w-4xl sm:grid md:grid-cols-5 sm:grid-cols-4 flex flex-col gap-4">
+      <AnimatePresence>
+        {!isExiting && (
+          <motion.div
+            className="sm:flex hidden flex-col-reverse items-end justify-end gap-4"
+            initial={{
+              opacity: 0,
+              x: -200,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{
+              opacity: 0,
+              x: -200,
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            <HardShadowButton
+              className={`bg-blue-50 w-full`}
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = "/documents/Isaac Arcia resume.pdf";
+                link.download = "Isaac Arcia resume.pdf";
+                link.click();
+              }}
+              popUpContent={
+                <HardShadowRect className="text-left w-full bg-white pt-14 p-2 ">
+                  Click to download as PDF
+                </HardShadowRect>
+              }
+            >
+              <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                <Download />
+                Resume
+              </div>
+            </HardShadowButton>
+            <HardShadowButton
+              className={`bg-blue-50 w-full`}
+              onClick={() => handleNavigation("/contact")}
+              popUpContent={
+                <HardShadowRect className="text-left w-full bg-white pt-14 p-2 ">
+                  All the ways you can contact me for hiring
+                </HardShadowRect>
+              }
+            >
+              <div className="font-extrabold p-4 flex flex-row gap-3 items-center w-full justify-center">
+                Contact
+              </div>
+            </HardShadowButton>
+            {Object.entries(buttons).map(([key, button]) => (
+              <HardShadowButton
+                key={key}
+                className={`${button.color} w-full`}
+                onClick={() => handleNavigation(button.route)}
+                aria-label={`Go to ${button.title} page`}
+                popUpContent={
+                  <HardShadowRect className="bg-white pt-14 p-2 text-left">
+                    {button.summary}
+                  </HardShadowRect>
+                }
+              >
+                <div className="font-extrabold p-4">{button.title}</div>
+              </HardShadowButton>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {!isExiting && (
+          <motion.div
+            className="md:col-span-4 col-span-3"
+            initial={{
+              opacity: 0,
+              x: 200,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            exit={{
+              opacity: 0,
+              x: 200,
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            <Introduction />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default HomePage;
+
+
+
+================================================
+File: pages/Projects.tsx
+================================================
+import { SectionLayout } from "@/components/ui/SectionLayout";
+import { FileText } from "lucide-react";
+
+const projectsData = {
+  kzooting: {
+    title: "The kzooting project",
+    period: "",
+    link: "https://github.com/ikz87/rpp-osu-keypad",
+    additionalLinks: ["https://github.com/ikz87/kzooting-GUI"],
+    content: [
+      "The kzooting is a completely DIY analog keypad inspired by wooting keyboards, and thus, posseses rapid trigger technology. The project started by modifying MX Reds keyboard switches by attaching a small neodimium magnet below the switch stem and glueing a linear hall effect sensor below the switch casing.",
+      "After some microcontroller programming on a Raspberry Pi Pico, the first kzooting prototype was alive and working!",
+      "I proceeded to modify the seven remaining switches and building a whole casing out of materials I had laying around.",
+      "With the kzooting complete, I developed (with the help of a cousin (ty calito <3)) a GUI desktop client written in Python using PyQt5 that allowed me to easily visualize the state of each key and configure all parameters related to key activation.",
+      "The last thing I worked on for this project was a nice looking key visualizer for when I play osu! with the device. You can also check a full video with a prototype of this visualizer here.",
+      "I presented this as a final project for my 'machines and computers' course. If you know spanish, you can check this document explaining every detail about the project.",
+    ],
+    react: [
+      <a
+        href="/documents/kzooting-document.pdf"
+        download
+        className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
+      >
+        <FileText className="text-green-400" strokeWidth={2.5} />
+        kzooting-document.pdf
+      </a>,
+    ],
+    images: [
+      {
+        url: "/images/kzooting-switch.webp",
+        alt: "Pictures of a modified MX red switch",
+      },
+      {
+        url: "/images/kzooting-prototype.gif",
+        alt: "A GIF of the first kzooting prototype",
+      },
+      {
+        url: "/images/kzooting-casing.webp",
+        alt: "A Picture of the complete kzooting casing",
+      },
+      {
+        url: "/images/kzooting-client.webp",
+        alt: "Screenshot of my desktop with the kzooting GUI client open",
+      },
+      {
+        url: "/images/kzooting-visualizer.gif",
+        alt: "A GIF showcasing the kzooting key visualizer",
+      },
+    ],
+  },
+  "facial-tracking": {
+    title: "Phone facial tracking",
+    period: "",
+    link: "https://github.com/ikz87/phone-facial-tracking",
+    content: [
+      "This project consisted on a device that could move my phone using two servomotors and processing real time video from the phone's camera so that it could track faces.",
+      "I started by assembling a base with the servomotors that could securely hold my phone in place. With that done, I wrote some code to interface with the microcontroller (a Raspberry Pi Pico) to manually move the servos so I could test the device. Then came some coding with OpenCV (in Python) and a *lot* of math to calculate the angle needed to move each servomotor so that the tracking would be as precise as possible.",
+      "With the project being done, I also built a desktop app with PyQT5 to show general real time information and a 3D simulation of the tracking taking place.",
+      "I presented this as a final project for my 'Control Systems' course. If you know spanish, you can check this document, where you'll find more information about the project, especially all the math behind it.",
+    ],
+    react: [
+      <a
+        href="/documents/pft-document.pdf"
+        download
+        className="hover:text-blue-400 flex flex-row gap-2 border-3 border-black font-extrabold rounded-lg p-2 mx-auto bg-green-100"
+      >
+        <FileText className=" text-green-400" strokeWidth={2.5} />
+        pft-document.pdf
+      </a>,
+    ],
+    images: [
+      {
+        url: "/images/pft-demo.gif",
+        alt: "A GIF showcasing real time facial tracking",
+      },
+      {
+        url: "/images/pft-base.webp",
+        alt: "Picture of the facial tracking device's base",
+      },
+      {
+        url: "/images/pft-app.webp",
+        alt: "Picture of the facial tracking desktop app",
+      },
+      {
+        url: "/images/pft-math.webp",
+        alt: "Picture of the 3D simulation for the facial tracking app",
+      },
+    ],
+  },
+  yawns: {
+    title: "Yawns",
+    period: "",
+    link: "https://github.com/ikz87/yawns",
+    content: [
+      "Yawns is a notification manager (or daemon) built with PyQt out of the necessity for highly customizable, adaptable notifications. Why would your notification for a brightness change look the same as your Spotify song change notification? Or even an email one? Yawns offers multiple ways to show desktop notifications depending on the notification title, summary, app name or 'yawn type'.",
+      "Although it's a somewhat unfinished project, It's still fully functional and I use it to this day on my linux installation.",
+    ],
+    images: [
+      {
+        url: "/images/yawns-demo.gif",
+        alt: "A GIF demonstrating different types of yawns",
+      },
+    ],
+  },
+  "vector-swizzling": {
+    title: "Python vector swizzling",
+    period: "",
+    link: "https://github.com/ikz87/python-vector-swizzling",
+    additionalLinks: ["https://pypi.org/project/vector-swizzling/"],
+    content: [
+      "This Python library provides flexible and intuitive vector manipulation with swizzling capabilities, designed to resemble GLSL vector handling for 2D, 3D, and 4D vectors. Originally built for my facial tracking project, I decided to publish this as my first Python package in PyPi.",
+    ],
+  },
+  "tty-cube": {
+    title: "TTY cube",
+    period: "",
+    link: "https://github.com/ikz87/tty-cube",
+    content: [
+      "This C program renders a rotating cube on your TTY via frame buffer. The program provides tons of configuration options to customize the appearance and behavior of the cube. Even implementing image rendering and (sort of) fragment shaders.",
+      "The cube is rendered using basic linear algebra and analytic geometry with a solution I came with while knowing nothing about actual rasterization.",
+    ],
+    images: [
+      {
+        url: "/images/tty-cube-demo.gif",
+        alt: "A GIF demonstrating TTY cube running",
+      },
+    ],
+  },
+};
+
+export default function Projects() {
+  return <SectionLayout items={projectsData} defaultSelected="kzooting" />;
+}
+
+
+
+================================================
+File: pages/Work.tsx
+================================================
+import { SectionLayout } from "@/components/ui/SectionLayout";
+
+const workData = {
+  "desarrollo-integral": {
+    title: "Desarrollo Integral",
+    period: "August 2023 - March 2024",
+    content: [
+      "This financial company had been using a system based on google sheets from the start, but as they grew in size, this proved to be inefficient.",
+      "My role involved developing a script that automatically scraped data from Google Sheets and converted it into a PostgreSQL database. I also created an API using Python, psycopg2, and Strawberry GraphQL. Finally, I designed and developed a web app with React, Typescript and Tailwind.",
+      "Needless to say, this software is private, but I've attached some screenshots showing two of several pages that interfaced with the backend to register data (new clients and loans in this case) and the login screen for company staff.",
+    ],
+    images: [
+      {
+        url: "/images/di-clients.webp",
+        alt: "Screenshot of client registration page for desarrollo integral",
+      },
+      {
+        url: "/images/di-loan.webp",
+        alt: "Screenshot of loan processing page for desarrollo integral",
+      },
+      {
+        url: "/images/di-login.webp",
+        alt: "Screenshot of login page for desarrollo integral",
+      },
+    ],
+  },
+  "opti-grow": {
+    title: "Opti-Grow",
+    period: "September 2024 - October 2024",
+    link: "https://www.optigrowinvest.com/#Inicio",
+    content: [
+      "Opti-Grow is a company that offers agronomic consultations. After working as an 'IT guy' for its founder and director Ricardo Navarro, he offered to hire me as a freelancer to develop a website for his company.",
+      "My role in this job was to follow previously established design ideas and adapt them to a responsive and professional looking website built with Svelte and deployed on an AWS S3 bucket with Cloudfront.",
+    ],
+    images: [
+      {
+        url: "/images/og-home.webp",
+        alt: "Screenshot of Opti-Grow's home page",
+      },
+      {
+        url: "/images/og-about.webp",
+        alt: "Screenshot of Opti-Grow's about page",
+      },
+      {
+        url: "/images/og-contact.webp",
+        alt: "Screenshot of Opti-Grow's contact info page",
+      },
+    ],
+  },
+  "ecuacion-futuro": {
+    title: "Ecuación Futuro",
+    period: "April 2024 - July 2024",
+    link: "https://ecuacionfuturo.org/#Home",
+    content: [
+      "Founded by Paulina Taboada, this is a non-profit organization that aims at raising the level of mathematical proficiency for children in state of vulnerability as an opportunity for human development. As of 2025, they have helped over 300 children to develop their math skills beyond what most children their age know.",
+      "In the past, I had helped Paulina as a programming tutor, so when they needed a website for Ecuación Futuro, her mom was nice enough to give me the opportunity to work for them as a front-end developer.",
+      "My role involved designing and developing a Svelte app that could communicate (in both english and spanish) the passion that Paulina and her team have for teaching, and deploying it in an EC2 instance using Nginx for routing. I built the first version of the website in about a month but stayed in contact with Paulina for some time after that to update information as they saw fit.",
+    ],
+    images: [
+      {
+        url: "/images/ef-home.webp",
+        alt: "Screenshot of Ecuación Futuro's home page",
+      },
+      {
+        url: "/images/ef-projects.webp",
+        alt: "Screenshot of Ecuación Futuro's projects page",
+      },
+      {
+        url: "/images/ef-volunteers.webp",
+        alt: "Screenshot of Ecuación Futuro's volunteers page",
+      },
+    ],
+  },
+};
+
+export default function Work() {
+  return (
+    <SectionLayout items={workData} defaultSelected="desarrollo-integral" />
+  );
+}
+
+
