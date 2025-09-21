@@ -1,21 +1,16 @@
-import { HardShadowButton } from "./ui/HardShadowButton.tsx";
 import { HardShadowRect } from "./ui/HardShadowRect.tsx";
-import { Github, Linkedin, Mail, Menu, Code } from "lucide-react";
+import { Github, Linkedin, Mail, Code } from "lucide-react";
 
-type TopBarProps = {
-  setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export function TopBar({ setIsSidebarOpen }: TopBarProps) {
+export function TopBar() {
   return (
     <div className="mx-auto w-full max-w-4xl flex flex-row h-16">
-      <HardShadowRect className="flex items-center flex-row sm:rounded-xl rounded-l-xl w-full bg-amber-50 h-full overflow-visible">
+      <HardShadowRect className="flex items-center flex-row rounded-xl w-full bg-amber-50 h-full overflow-visible">
         <div className="w-full md:text-lg flex md:gap-3 gap-2 items-center">
           <h1 className="pl-4 text-nowrap font-extrabold">ikz87's portfolio</h1>
           <a
             target="_blank"
             href="mailto:i.arcia135@gmail.com"
-            className="md:h-11 h-10 sm:flex hidden border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+            className="md:h-11 h-10 border-black flex hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
           >
             <Mail className="text-red-600" />
             i.arcia135@gmail.com
@@ -24,7 +19,7 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
             target="_blank"
             href="https://github.com/ikz87/new-portfolio"
             rel="noopener noreferrer"
-            className="md:h-11 h-10 text-nowrap sm:flex hidden border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
+            className="md:h-11 h-10 text-nowrap flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
           >
             <Code className="text-green-600" />
             View source
@@ -49,18 +44,6 @@ export function TopBar({ setIsSidebarOpen }: TopBarProps) {
           </a>
         </div>
       </HardShadowRect>
-      <div className="w-fit">
-        <HardShadowButton
-          popUpContent={null}
-          onClick={() => {
-            setIsSidebarOpen(true);
-          }}
-          aria-label="Open sidebar menu"
-          className="-ml-2 p-4 cursor-pointer sm:hidden bg-blue-50 h-16 flex !rounded-l-none items-center"
-        >
-          <Menu strokeWidth={3} className="" />
-        </HardShadowButton>
-      </div>
     </div>
   );
 }

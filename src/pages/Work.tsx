@@ -1,4 +1,4 @@
-import { SectionLayout } from "@/components/ui/SectionLayout";
+import { SectionLayout } from "@/components/SectionLayout";
 
 const workData = {
   "desarrollo-integral": {

@@ -1,4 +1,4 @@
-import { SectionLayout } from "@/components/ui/SectionLayout";
+import { SectionLayout } from "@/components/SectionLayout";
 import { HardShadowButton } from "@/components/ui/HardShadowButton";
 import { HardShadowRect } from "@/components/ui/HardShadowRect";
 import { useState, useRef, useEffect } from "react";

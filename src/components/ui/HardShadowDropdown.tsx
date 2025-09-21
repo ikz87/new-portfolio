@@ -43,7 +43,7 @@ export function HardShadowDropdown({
 
         {dropdownContent && (
           <motion.div
-            className="z-30 absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
+            className="z-20 absolute top-4 left-0 pl-4 pr-2 w-full overflow-y-hidden flex flex-col justify-end"
             variants={{
               rest: { height: 0 },
               open: { height: "auto" },
@@ -54,7 +54,7 @@ export function HardShadowDropdown({
         )}
 
         <motion.div
-          className={`z-40 origin-top-left absolute top-0 left-0 border-4 rounded-xl border-black overflow-hidden ${className}`}
+          className={`z-30 origin-top-left absolute top-0 left-0 border-4 rounded-xl border-black overflow-hidden ${className}`}
           variants={{
             rest: {
               rotate: 0,
