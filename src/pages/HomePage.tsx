@@ -163,7 +163,7 @@ const HomePage: React.FC = () => {
               y: 50,
             }}
             transition={{ duration: 0.2 }}
-            className="z-30 sm:hidden flex items-center justify-center fixed bottom-0 left-0 w-dvw h-18 pl-2 pr-4">
+            className="z-20 sm:hidden flex items-center justify-center fixed bottom-0 left-0 w-dvw h-18 pl-2 pr-4">
             <div className="translate-y-2">
               <HardShadowRect className="pt-2 px-3 rounded-t-xl h-18 bg-amber-50">
                 <div className="grid grid-cols-2 max-w-64 gap-3 h-8 text-sm">
