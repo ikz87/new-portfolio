@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
   );
 
   return (
-    <div className="mx-auto max-w-4xl sm:grid md:grid-cols-5 sm:grid-cols-4 flex flex-col gap-4">
+    <div className="mx-auto max-w-4xl sm:grid md:grid-cols-4 sm:grid-cols-3 flex flex-col gap-4">
       <AnimatePresence>
         {!isExiting && (
           <motion.div
@@ -128,7 +128,7 @@ const HomePage: React.FC = () => {
       <AnimatePresence>
         {!isExiting && (
           <motion.div
-            className="sm:block hidden md:col-span-4 col-span-3"
+            className="sm:block hidden md:col-span-3 col-span-2"
             initial={{
               opacity: 0,
               x: 200,
