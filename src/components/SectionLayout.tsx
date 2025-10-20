@@ -167,7 +167,7 @@ export function SectionLayout({
             }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: animDuration, ease: "easeInOut" }}
-            className="flex flex-row items-center gap-3 mx-auto max-w-xl w-full"
+            className="flex flex-row items-center gap-3 mx-auto max-w-3xl w-full"
           >
             {selectedItem.images && selectedItem.images.length > 1 && (
               <motion.div

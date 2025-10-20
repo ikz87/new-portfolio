@@ -71,6 +71,39 @@ const workData = {
       },
     ],
   },
+  "seniorthrive": {
+    title: "SeniorThrive",
+    period: "March 2025 - October 2025",
+    link: "https://seniorthrive.com/",
+    content: [
+      "SeniorThrive is a platform that helps older adults live safely and independently at home through AI-driven insights and family collaboration tools.",
+      "I developed the Room Scans feature, which analyzes room photos with AI to detect safety risks and provide personalized recommendations along with a safety score.",
+      "I also designed and built the ThriveCircle system: a hierarchical structure connecting older adults, family members, and caregivers with specific roles, permissions, and recovery for deleted data.",
+      "Additionally, I worked on the Supabase database architecture, authentication, and overall API, as well as features like shared documents, goal tracking, and task management linked to room scan insights.",
+    ],
+    images: [
+      {
+        url: "/images/seniorthrive-room-scan.webp",
+        alt: "Screenshot of Room Scan page",
+      },
+      {
+        url: "/images/seniorthrive-circle-settings.webp",
+        alt: "Screenshot of ThriveCircle settings modal",
+      },
+      {
+        url: "/images/seniorthrive-todos.webp",
+        alt: "Screenshot of Home Safety todo's page",
+      },
+      {
+        url: "/images/seniorthrive-scan-history.webp",
+        alt: "Screenshot of Room Scan History page",
+      },
+      {
+        url: "/images/seniorthrive-profile-hub.webp",
+        alt: "Screenshot of Profile Hub page",
+      },
+    ],
+  },
 };
 
 export default function Work() {
