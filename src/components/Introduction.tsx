@@ -42,7 +42,7 @@ export function Introduction() {
           Opti-Grow Consulting Group, Front-end developer (September 2024 -
           October 2024)
         </li>
-        <li>SeniorThrive, Full-stack developer (April 2025 - Now)</li>
+        <li>SeniorThrive, Full-stack developer (March 2025 - October 2025)</li>
       </ul>
       <p className="mt-4">
         Please refer to my{" "}
