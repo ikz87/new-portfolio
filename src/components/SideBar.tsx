@@ -71,9 +71,9 @@ export function SideBar({
                         <div className="px-2 w-full grid grid-cols-2 gap-2 text-sm">
                           <a
                             target="_blank"
-                            href="mailto:i.arcia135@gmail.com"
+                            href="mailto:arcia.castro.i@gmail.com"
                             className="justify-center flex border-black hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
-                            aria-label="Send email to i.arcia135@gmail.com"
+                            aria-label="Send email to arcia.castro.i@gmail.com"
                           >
                             <Mail className="text-red-600" />
                             Email me

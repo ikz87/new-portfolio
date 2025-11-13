@@ -148,11 +148,11 @@ export function MobileTopBar() {
           <h1 className="pl-4 text-nowrap font-extrabold">ikz87's portfolio</h1>
           <a
             target="_blank"
-            href="mailto:i.arcia135@gmail.com"
+            href="mailto:arcia.castro.i@gmail.com"
             className="md:h-11 h-10 border-black flex hover:text-blue-500 p-1 bg-white rounded-lg items-center px-2 my-1 border-3 gap-2 "
           >
             <Mail className="text-red-600" />
-            i.arcia135@gmail.com
+            arcia.castro.i@gmail.com
           </a>
           <a
             target="_blank"

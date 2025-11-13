@@ -15,8 +15,8 @@ export default function Contact() {
       icon: <Phone />,
     },
     businessEmail: {
-      toCopy: "i.arcia135@gmail.com",
-      label: "Business: i.arcia135@gmail.com",
+      toCopy: "arcia.castro.i@gmail.com",
+      label: "Business: arcia.castro.i@gmail.com",
       icon: <Mail />,
     },
     personalEmail: {
