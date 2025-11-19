@@ -2,6 +2,26 @@ import { SectionLayout } from "@/components/SectionLayout";
 import { FileText } from "lucide-react";
 
 const projectsData = {
+  ikzapps: {
+    title: "ikz-apps.online",
+    period: "",
+    link: "https://ikz-apps.online/",
+    content: [
+      "ikzapps is a growing collection of small free web based tools that I decided to build after seeing the current state of other similar websites. I built it using a more complete version of my own 'HardShadow UI' library that you're seeing in this portfolio.",
+      "Currently, it only hosts a QR Code Generator",
+    ],
+    images: [
+      {
+        url: "/images/ikz-apps-home.webp",
+        alt: "Screenshot of ikz-apps.online homepage",
+      },
+      {
+        url: "/images/ikz-apps-qr-code-generator.webp",
+        alt: "Screenshot of ikz-apps.online QR Code Generator",
+      },
+
+    ],
+  },
   kzooting: {
     title: "The kzooting project",
     period: "",
@@ -129,5 +149,5 @@ const projectsData = {
 };
 
 export default function Projects() {
-  return <SectionLayout items={projectsData} defaultSelected="kzooting" />;
+  return <SectionLayout items={projectsData} defaultSelected="ikzapps" />;
 }
