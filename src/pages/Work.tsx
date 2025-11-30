@@ -1,26 +1,36 @@
 import { SectionLayout } from "@/components/SectionLayout";
 
 const workData = {
-  "desarrollo-integral": {
-    title: "Desarrollo Integral",
-    period: "August 2023 - March 2024",
+  "seniorthrive": {
+    title: "SeniorThrive",
+    period: "March 2025 - October 2025",
+    link: "https://seniorthrive.com/",
     content: [
-      "This financial company had been using a system based on google sheets from the start, but as they grew in size, this proved to be inefficient.",
-      "My role involved developing a script that automatically scraped data from Google Sheets and converted it into a PostgreSQL database. I also created an API using Python, psycopg2, and Strawberry GraphQL. Finally, I designed and developed a web app with React, Typescript and Tailwind.",
-      "Needless to say, this software is private, but I've attached some screenshots showing two of several pages that interfaced with the backend to register data (new clients and loans in this case) and the login screen for company staff.",
+      "SeniorThrive is a platform that helps older adults live safely and independently at home through AI-driven insights and family collaboration tools.",
+      "I developed the Room Scans feature, which analyzes room photos with AI to detect safety risks and provide personalized recommendations along with a safety score.",
+      "I also designed and built the ThriveCircle system: a hierarchical structure connecting older adults, family members, and caregivers with specific roles, permissions, and recovery for deleted data.",
+      "Additionally, I worked on the Supabase database architecture, authentication, and overall API, as well as features like shared documents, goal tracking, and task management linked to room scan insights.",
     ],
     images: [
       {
-        url: "/images/di-clients.webp",
-        alt: "Screenshot of client registration page for desarrollo integral",
+        url: "/images/seniorthrive-room-scan.webp",
+        alt: "Screenshot of Room Scan page",
       },
       {
-        url: "/images/di-loan.webp",
-        alt: "Screenshot of loan processing page for desarrollo integral",
+        url: "/images/seniorthrive-circle-settings.webp",
+        alt: "Screenshot of ThriveCircle settings modal",
       },
       {
-        url: "/images/di-login.webp",
-        alt: "Screenshot of login page for desarrollo integral",
+        url: "/images/seniorthrive-todos.webp",
+        alt: "Screenshot of Home Safety todo's page",
+      },
+      {
+        url: "/images/seniorthrive-scan-history.webp",
+        alt: "Screenshot of Room Scan History page",
+      },
+      {
+        url: "/images/seniorthrive-profile-hub.webp",
+        alt: "Screenshot of Profile Hub page",
       },
     ],
   },
@@ -71,36 +81,26 @@ const workData = {
       },
     ],
   },
-  "seniorthrive": {
-    title: "SeniorThrive",
-    period: "March 2025 - October 2025",
-    link: "https://seniorthrive.com/",
+  "desarrollo-integral": {
+    title: "Desarrollo Integral",
+    period: "August 2023 - March 2024",
     content: [
-      "SeniorThrive is a platform that helps older adults live safely and independently at home through AI-driven insights and family collaboration tools.",
-      "I developed the Room Scans feature, which analyzes room photos with AI to detect safety risks and provide personalized recommendations along with a safety score.",
-      "I also designed and built the ThriveCircle system: a hierarchical structure connecting older adults, family members, and caregivers with specific roles, permissions, and recovery for deleted data.",
-      "Additionally, I worked on the Supabase database architecture, authentication, and overall API, as well as features like shared documents, goal tracking, and task management linked to room scan insights.",
+      "This financial company had been using a system based on google sheets from the start, but as they grew in size, this proved to be inefficient.",
+      "My role involved developing a script that automatically scraped data from Google Sheets and converted it into a PostgreSQL database. I also created an API using Python, psycopg2, and Strawberry GraphQL. Finally, I designed and developed a web app with React, Typescript and Tailwind.",
+      "Needless to say, this software is private, but I've attached some screenshots showing two of several pages that interfaced with the backend to register data (new clients and loans in this case) and the login screen for company staff.",
     ],
     images: [
       {
-        url: "/images/seniorthrive-room-scan.webp",
-        alt: "Screenshot of Room Scan page",
+        url: "/images/di-clients.webp",
+        alt: "Screenshot of client registration page for desarrollo integral",
       },
       {
-        url: "/images/seniorthrive-circle-settings.webp",
-        alt: "Screenshot of ThriveCircle settings modal",
+        url: "/images/di-loan.webp",
+        alt: "Screenshot of loan processing page for desarrollo integral",
       },
       {
-        url: "/images/seniorthrive-todos.webp",
-        alt: "Screenshot of Home Safety todo's page",
-      },
-      {
-        url: "/images/seniorthrive-scan-history.webp",
-        alt: "Screenshot of Room Scan History page",
-      },
-      {
-        url: "/images/seniorthrive-profile-hub.webp",
-        alt: "Screenshot of Profile Hub page",
+        url: "/images/di-login.webp",
+        alt: "Screenshot of login page for desarrollo integral",
       },
     ],
   },
