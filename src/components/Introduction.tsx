@@ -35,9 +35,9 @@ export function Introduction() {
       <p className="mt-4 font-extrabold text-green-600">Experience</p>
       <ul className="list-disc list-outside ml-4">
         <li>
-          Desarrollo Integral, Full-stack developer (August 2023 - March 2024)
+          Desarrollo Integral, Full-stack developer (June 2023 - March 2024)
         </li>
-        <li>Ecuación Futuro, Front-end developer (April 2024 - July 2024)</li>
+        <li>Ecuación Futuro, Front-end developer (April 2024 - August 2024)</li>
         <li>
           Opti-Grow Consulting Group, Front-end developer (September 2024 -
           October 2024)
