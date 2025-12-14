@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
     coolProjects: {
       title: "Projects",
       summary:
-        "These are projects I've worked on as a hobbyist. They are all open source so you can get an idea of the quality of the code I write by visiting each repo",
+        "These are projects I've worked on as a hobbyist. Almost all of them are open source so you can get an idea of the quality of the code I write by visiting each repo",
       route: "/projects",
       color: "bg-blue-50",
     },

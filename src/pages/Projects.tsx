@@ -2,13 +2,36 @@ import { SectionLayout } from "@/components/SectionLayout";
 import { FileText } from "lucide-react";
 
 const projectsData = {
+  desmoche: {
+    title: "Desmoche Online",
+    period: "",
+    link: "https://desmoche-online.onrender.com/",
+    content: [
+      "The one and only online platform where you can play the Nicaraguan rummy card game: Desmoche",
+      "Still an ongoing project but I have some ambitious ideas for it. Right now it has user auth, matchamaking and core game mechanics set up, meaning you can just register and play the game with a friend already, but I plan to add many more features before actually releasing this",
+      "This is the only closed source project in this section",
+    ],
+    images: [
+      {
+        url: "/images/desmoche-gameplay.gif",
+        alt: "GIF showcasing desmoche online gameplay",
+      },
+      {
+        url: "/images/desmoche-login.webp",
+        alt: "Screenshot of desmoche online's login page".
+      },
+      {
+        url: "/images/desmoche-profile.webp",
+        alt: "Screenshot of desmoche online's profile page".
+      },
+    ],
+  },
   ikzapps: {
     title: "ikz-apps.online",
     period: "",
     link: "https://ikz-apps.online/",
     content: [
       "ikzapps is a growing collection of small free web based tools that I decided to build after seeing the current state of other similar websites. I built it using a more complete version of my own 'HardShadow UI' library that you're seeing in this portfolio.",
-      "Currently, it only hosts a QR Code Generator",
     ],
     images: [
       {
