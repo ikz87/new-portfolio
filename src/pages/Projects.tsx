@@ -8,7 +8,7 @@ const projectsData = {
     link: "https://desmoche-online.onrender.com/",
     content: [
       "The one and only online platform where you can play the Nicaraguan rummy card game: Desmoche",
-      "Still an ongoing project but I have some ambitious ideas for it. Right now it has user auth, matchamaking and core game mechanics set up, meaning you can just register and play the game with a friend already, but I plan to add many more features before actually releasing this.",
+      "Still an ongoing project but I have some ambitious ideas for it. Right now it has user auth, matchmaking and core game mechanics set up, meaning you can just register and play the game with a friend already, but I plan to add many more features before actually releasing this.",
       "This is the only closed source project in this section.",
     ],
     images: [

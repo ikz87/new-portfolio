@@ -108,6 +108,6 @@ const workData = {
 
 export default function Work() {
   return (
-    <SectionLayout items={workData} defaultSelected="desarrollo-integral" />
+    <SectionLayout items={workData} defaultSelected="seniorthrive" />
   );
 }
