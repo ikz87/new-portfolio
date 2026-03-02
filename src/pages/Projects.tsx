@@ -192,5 +192,5 @@ const projectsData = {
 };
 
 export default function Projects() {
-  return <SectionLayout items={projectsData} defaultSelected="desmoche" />;
+  return <SectionLayout items={projectsData} defaultSelected="ultrakidle" />;
 }
