@@ -4,7 +4,7 @@ import { FileText } from "lucide-react";
 const projectsData = {
   ultrakidle : {
     title: "ULTRAKIDLE",
-    perios: "",
+    period: "",
     link: "https://ultrakidle.online/",
     content: [
       "With the trend of making wordle-like games about guessing randomly picked videogame characters daily, I took the decision to make one of them for one of my favorite games ever: ULTRAKILL.",
