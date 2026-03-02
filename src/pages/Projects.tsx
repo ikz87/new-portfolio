@@ -2,6 +2,26 @@ import { SectionLayout } from "@/components/SectionLayout";
 import { FileText } from "lucide-react";
 
 const projectsData = {
+  ultrakidle : {
+    title: "ULTRAKIDLE",
+    perios: "",
+    link: "https://ultrakidle.online/",
+    content: [
+      "With the trend of making wordle-like games about guessing randomly picked videogame characters daily, I took the decision to make one of them for one of my favorite games ever: ULTRAKILL.",
+      "This small project started as an experiment but ended up teaching me a thing or two about anonyumous sign ins and cron jobs on databases.",
+      "It usually hits about 80 players daily and is still growing.",
+    ],
+    images: [
+      {
+        url: "/images/ultrakidle-home.gif",
+        alt: "Screenshot of ULTRAKIDLE's home page",
+      },
+      {
+        url: "/images/ultrakidle-guessboard.gif",
+        alt: "GIF showcasing a correct guess in ULTRAKIDLE",
+      },
+    ],
+  },
   desmoche: {
     title: "Desmoche Online",
     period: "",
