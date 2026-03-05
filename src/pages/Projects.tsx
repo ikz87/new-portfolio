@@ -9,7 +9,7 @@ const projectsData = {
     content: [
       "With the trend of making wordle-like games about guessing randomly picked videogame characters daily, I took the decision to make one of them for one of my favorite games ever: ULTRAKILL.",
       "This small project started as an experiment but ended up teaching me a thing or two about anonyumous sign ins and cron jobs on databases.",
-      "It usually hits about 80 players daily and is still growing.",
+      "It usually hits about 130 players daily and is still growing.",
     ],
     images: [
       {
