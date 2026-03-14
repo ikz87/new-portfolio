@@ -6,10 +6,13 @@ const projectsData = {
     title: "ULTRAKIDLE",
     period: "",
     link: "https://ultrakidle.online/",
+    additionalLinks: ["https://discord.com/discovery/applications/1478255175926808696"],
     content: [
-      "With the trend of making wordle-like games about guessing randomly picked videogame characters daily, I took the decision to make one of them for one of my favorite games ever: ULTRAKILL.",
-      "This small project started as an experiment but ended up teaching me a thing or two about anonyumous sign ins and cron jobs on databases.",
-      "It usually hits about 130 players daily and is still growing.",
+      "Inspired by the trend of Wordle-like games for guessing videogame characters, I decided to make one for one of my favorite games: ULTRAKILL.",
+      "The project is both a web app and a verified Discord activity, and it gained significant traction within a week of launch.",
+      "Current numbers as of writing: 149 server app installs | 272 Discord users signed in | 2,000 average daily players across both versions.",
+      "What started as a small experiment ended up teaching me about anonymous sign-ins, database cron jobs, and integrating third-party SDKs.",
+      "Next step is setting up Google AdSense to make the site self-sustaining.",
     ],
     images: [
       {
