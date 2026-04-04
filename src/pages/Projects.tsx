@@ -10,7 +10,7 @@ const projectsData = {
     content: [
       "Inspired by the trend of Wordle-like games for guessing videogame characters, I decided to make one for one of my favorite games: ULTRAKILL.",
       "The project is both a web app and a verified Discord activity, and it gained significant traction within a week of launch.",
-      "Current numbers as of writing: 149 server app installs | 272 Discord users signed in | 2,000 average daily players across both versions.",
+      "Current numbers as of writing: 149 server app installs | 272 Discord users signed in | 3,000 average daily players across both versions.",
       "What started as a small experiment ended up teaching me about anonymous sign-ins, database cron jobs, and integrating third-party SDKs.",
       "Next step is setting up Google AdSense to make the site self-sustaining.",
     ],
